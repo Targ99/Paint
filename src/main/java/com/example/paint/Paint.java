@@ -22,18 +22,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-//import java.util.List;
-//import javafx.scene.image.PixelReader; //Helpful libraries that will be useful later
-//import javafx.scene.image.PixelWriter;
-//import javafx.scene.image.WritableImage;
+
 
 public class Paint extends Application
 {
-    private int numimages = 0;
-    private MenuItem image1 = new MenuItem("Image Not Used");
-    private MenuItem image2 = new MenuItem("Image Not Used");
-    private MenuItem image3 = new MenuItem("Image Not Used");
-    private MenuItem image4 = new MenuItem("Image Not Used");
+
     private Menu remove;
     private float totalWidth = 700;
     private float width = 900; //Class vars for height + width
@@ -53,19 +46,11 @@ public class Paint extends Application
         Menu menuEdit = new Menu("Edit");
         MenuItem open = new MenuItem("Open");
         Menu remove = new Menu("Remove");
-        remove.getItems().addAll(image1, image2, image3, image4);
-        SeparatorMenuItem separator = new SeparatorMenuItem();
+
 
         open.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) { findimg(window); }});
-        image1.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) { remenu(image1); }});
-        image2.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) { remenu(image2); }});
-        image3.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) { remenu(image3); }});
-        image4.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) { remenu(image4); }});
+
 
         MenuItem insert = new MenuItem("Insert");
         menuFile.getItems().addAll(open,insert, remove, separator); //Adds open, insert, remove to file dropdown
@@ -86,10 +71,7 @@ public class Paint extends Application
         File filename = openfile.showOpenDialog(stage); //Records the file to be opened
         openimg(filename); //Calling openimg() to open the file
     }
-    private void remenu(MenuItem menuitem) //constructor for a menu of remaining images in doc
-    {
-        remove.getItems().remove(menuitem);
-    }
+
 
     private void openimg(File filename) //Opens file found in findimg()
     {
@@ -102,13 +84,9 @@ public class Paint extends Application
                 ImageView imageView = new ImageView();
                 imageView.setImage(image);
                 if(image.getWidth() > image.getHeight()) //Attempt to fix oversized image
-                {
-                    imageView.setFitWidth(width*0.45);
-                }
+                {imageView.setFitWidth(width*0.45);}
                 else
-                {
-                    imageView.setFitHeight(height*0.45);
-                }
+                {imageView.setFitHeight(height*0.45);}
                 imageView.setPreserveRatio(true); //Preserve the original aspect ratio
                 picdisplay.getChildren().add(imageView); //Adding image to Vbox to display
 //                System.out.print(image.getWidth()); //Attempt to fix oversized image
@@ -116,9 +94,31 @@ public class Paint extends Application
                 double widthUsed = image.getWidth();
                 float f = (float) widthUsed;
                 totalWidth = (totalWidth + f);
-//                window.setWidth(totalWidth);
-//                picdisplay.getScene().getWindow().sizeToScene();
-//                window.sizeToScene();
+//                switch (numimages)
+//                {
+//                    case 0:
+//                        image1.setText("filename");
+//                        image1.setDisable(false);
+//                        break;
+//                    case 1:
+//                        image2.setText("filename");
+//                        image2.setDisable(false);
+//                        break;
+//                    case 2:
+//                        image3.setText("filename");
+//                        image3.setDisable(false);
+//                        break;
+//                    case 3:
+//                        image4.setText("filename");
+//                        image4.setDisable(false);
+//                    default:
+//                        fileextension.setText("No More Images Left to Delete");
+//                        fileextension.setFont(Font.font(15));;
+//                        break;
+//                }
+////                window.setWidth(totalWidth);
+////                picdisplay.getScene().getWindow().sizeToScene();
+////                window.sizeToScene();
             }
             else
             {   //Case if unaccepted format
