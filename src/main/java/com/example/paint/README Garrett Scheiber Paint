@@ -1,0 +1,15 @@
+Garrett Scheiber Pain(t)
+Version 0.001
+	Date: 09/09/2021
+	New Features:
+		GUI
+		Opening an image of JPEG or PNG format through file explorer
+	Known Issues:
+		Next image will appear below former when inserted
+		First image fits within window, but subsequent images may not
+	Expected Next Sprint:
+		Scroll bars
+		Better scene/stage organization within code
+	Links:
+
+Version
