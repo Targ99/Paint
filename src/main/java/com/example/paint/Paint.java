@@ -53,7 +53,7 @@ public class Paint extends Application
 
 
         MenuItem insert = new MenuItem("Insert");
-        menuFile.getItems().addAll(open,insert, remove, separator); //Adds open, insert, remove to file dropdown
+        menuFile.getItems().addAll(open,insert, remove); //Adds open, insert, remove to file dropdown
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
         topbar.getMenus().setAll(menuFile, menuEdit); //Adds menus to a menu bar
         VBox menuBox = new VBox(topbar); //Adds the menu to a VBox
