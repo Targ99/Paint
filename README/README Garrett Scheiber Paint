@@ -1,5 +1,5 @@
 Garrett Scheiber Pain(t)
-Version 0.001
+Version: 0.001
 	Date: 09/09/2021
 	New Features:
 		GUI
@@ -9,7 +9,7 @@ Version 0.001
 		First image fits within window, but subsequent images may not
 	Expected Next Sprint:
 		Scroll bars
-		Better scene/stage organization within code
+		Better scene/stage organization within code and files
 	Links:
-
+        GitHub: https://github.com/Targ99/Paint
 Version
