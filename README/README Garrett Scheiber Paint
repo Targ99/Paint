@@ -30,9 +30,16 @@ Version: 0.001      Date: 09/10/2021
             Add another class for image format checking
             May incorporate
         GUI-Related:
+            Add a clear board function
             Add different window icon
         	Expand top menu bar utilities
 		    Add scroll bars
 	        Change the file type error message to a pop-up
 		    Include acceptable image formats in the error message
 ------------------------------------------------------------------------
+Version 0.002      Date: 09/17/2021
+    -New Features:
+
+    -Known Issues:
+
+    Expected Next Sprint:

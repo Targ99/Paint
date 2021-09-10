@@ -9,6 +9,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -26,30 +27,35 @@ import java.nio.file.Files;
 
 public class Paint extends Application
 {
+    private float totalWidth = 700;
     private float width = 700; //Class vars for height + width
     private float height = 700;
 //    private Text file = new Text(" ");
     private Text fileextension = new Text(" "); //Text for exception handling
     private VBox root = new VBox(); //Vbox addressable by multiple functions
-    @Override
+    private HBox picdisplay = new HBox(); //HBox for picture display
+    Stage window;
+//    @Override
     public void start(Stage window)
     {
         window.setHeight(height); //Setting stage height + width
         window.setWidth(width);
-//        window.getIcons().add(new Image("/path/to/stackoverflow.jpg")); //For window icon
+//      window.getIcons().add(new Image("/path/to/stackoverflow.jpg")); //For window icon
         fileextension.setFill(Color.RED);
         Menu menuFile = new Menu("File"); //instantiating the new menus
         Menu menuEdit = new Menu("Edit");
         MenuItem open = new MenuItem("Open");
-        open.setOnAction(new EventHandler<ActionEvent>() {
+        open.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent actionEvent) { findimg(window); }});
+            public void handle(ActionEvent actionEvent) { findimg(window); }
+        });
         MenuItem insert = new MenuItem("Insert");
         menuFile.getItems().addAll(open,insert); //Adds open, insert to file dropdown
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
         topbar.getMenus().setAll(menuFile, menuEdit); //Adds menus to a menu bar
         VBox menuBox = new VBox(topbar); //Adds the menu to a VBox
-        root.getChildren().addAll(topbar, fileextension);
+        root.getChildren().addAll(topbar, fileextension, picdisplay);
         Scene Defaultscene = new Scene(root); //Creates the default scene
         window.setTitle("GS Paint");
         window.setScene(Defaultscene); //Activates the default scene
@@ -76,16 +82,22 @@ public class Paint extends Application
                 imageView.setImage(image);
                 if(image.getWidth() > image.getHeight()) //Attempt to fix oversized image
                 {
-                    imageView.setFitWidth(width*0.75);
+                    imageView.setFitWidth(width*0.45);
                 }
                 else
                 {
-                    imageView.setFitHeight(height*0.75);
+                    imageView.setFitHeight(height*0.45);
                 }
                 imageView.setPreserveRatio(true); //Preserve the original aspect ratio
-                root.getChildren().add(imageView); //Adding image to Vbox to display
+                picdisplay.getChildren().add(imageView); //Adding image to Vbox to display
 //                System.out.print(image.getWidth()); //Attempt to fix oversized image
 //                System.out.print(image.getHeight());
+                double widthUsed = image.getWidth();
+                float f = (float) widthUsed;
+                totalWidth = (totalWidth + f);
+                window.setWidth(totalWidth);
+//                picdisplay.getScene().getWindow().sizeToScene();
+                window.sizeToScene();
             }
             else
             {   //Case if unaccepted format
