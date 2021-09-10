@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -21,18 +22,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.List;
+//import java.util.List;
 //import javafx.scene.image.PixelReader; //Helpful libraries that will be useful later
 //import javafx.scene.image.PixelWriter;
 //import javafx.scene.image.WritableImage;
 
 public class Paint extends Application
 {
-    //private
+    private int numimages = 0;
+    private MenuItem image1 = new MenuItem("Image Not Used");
+    private MenuItem image2 = new MenuItem("Image Not Used");
+    private MenuItem image3 = new MenuItem("Image Not Used");
+    private MenuItem image4 = new MenuItem("Image Not Used");
+    private Menu remove;
     private float totalWidth = 700;
     private float width = 900; //Class vars for height + width
     private float height = 700;
-//    private Text file = new Text(" ");
     private Text fileextension = new Text(" "); //Text for exception handling
     private VBox root = new VBox(); //Vbox addressable by multiple functions
     private HBox picdisplay = new HBox(); //HBox for picture display
@@ -47,20 +52,23 @@ public class Paint extends Application
         Menu menuFile = new Menu("File"); //instantiating the new menus
         Menu menuEdit = new Menu("Edit");
         MenuItem open = new MenuItem("Open");
-        MenuItem remove = new MenuItem("Remove");
-        open.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent actionEvent) { findimg(window); }
-        });
-        remove.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent actionEvent) { remimg(window); }
-        });
+        Menu remove = new Menu("Remove");
+        remove.getItems().addAll(image1, image2, image3, image4);
+        SeparatorMenuItem separator = new SeparatorMenuItem();
+
+        open.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent actionEvent) { findimg(window); }});
+        image1.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent actionEvent) { remenu(image1); }});
+        image2.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent actionEvent) { remenu(image2); }});
+        image3.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent actionEvent) { remenu(image3); }});
+        image4.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent actionEvent) { remenu(image4); }});
 
         MenuItem insert = new MenuItem("Insert");
-        menuFile.getItems().addAll(open,insert, remove); //Adds open, insert, remove to file dropdown
+        menuFile.getItems().addAll(open,insert, remove, separator); //Adds open, insert, remove to file dropdown
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
         topbar.getMenus().setAll(menuFile, menuEdit); //Adds menus to a menu bar
         VBox menuBox = new VBox(topbar); //Adds the menu to a VBox
@@ -78,12 +86,9 @@ public class Paint extends Application
         File filename = openfile.showOpenDialog(stage); //Records the file to be opened
         openimg(filename); //Calling openimg() to open the file
     }
-    private void remimg(Stage stage) //Opens a file explorer to find an image
+    private void remenu(MenuItem menuitem) //constructor for a menu of remaining images in doc
     {
-        FileChooser openfile = new FileChooser(); //Creates instance of file explorer
-        openfile.setTitle("Open Image");
-        File filename = openfile.showOpenDialog(stage); //Records the file to be opened
-        openimg(filename); //Calling openimg() to open the file
+        remove.getItems().remove(menuitem);
     }
 
     private void openimg(File filename) //Opens file found in findimg()
@@ -111,9 +116,9 @@ public class Paint extends Application
                 double widthUsed = image.getWidth();
                 float f = (float) widthUsed;
                 totalWidth = (totalWidth + f);
-                window.setWidth(totalWidth);
+//                window.setWidth(totalWidth);
 //                picdisplay.getScene().getWindow().sizeToScene();
-                window.sizeToScene();
+//                window.sizeToScene();
             }
             else
             {   //Case if unaccepted format
