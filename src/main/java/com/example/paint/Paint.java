@@ -21,14 +21,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.List;
 //import javafx.scene.image.PixelReader; //Helpful libraries that will be useful later
 //import javafx.scene.image.PixelWriter;
 //import javafx.scene.image.WritableImage;
 
 public class Paint extends Application
 {
+    //private
     private float totalWidth = 700;
-    private float width = 700; //Class vars for height + width
+    private float width = 900; //Class vars for height + width
     private float height = 700;
 //    private Text file = new Text(" ");
     private Text fileextension = new Text(" "); //Text for exception handling
@@ -45,13 +47,20 @@ public class Paint extends Application
         Menu menuFile = new Menu("File"); //instantiating the new menus
         Menu menuEdit = new Menu("Edit");
         MenuItem open = new MenuItem("Open");
+        MenuItem remove = new MenuItem("Remove");
         open.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent actionEvent) { findimg(window); }
         });
+        remove.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent actionEvent) { remimg(window); }
+        });
+
         MenuItem insert = new MenuItem("Insert");
-        menuFile.getItems().addAll(open,insert); //Adds open, insert to file dropdown
+        menuFile.getItems().addAll(open,insert, remove); //Adds open, insert, remove to file dropdown
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
         topbar.getMenus().setAll(menuFile, menuEdit); //Adds menus to a menu bar
         VBox menuBox = new VBox(topbar); //Adds the menu to a VBox
@@ -63,6 +72,13 @@ public class Paint extends Application
     }
 
     private void findimg(Stage stage) //Opens a file explorer to find an image
+    {
+        FileChooser openfile = new FileChooser(); //Creates instance of file explorer
+        openfile.setTitle("Open Image");
+        File filename = openfile.showOpenDialog(stage); //Records the file to be opened
+        openimg(filename); //Calling openimg() to open the file
+    }
+    private void remimg(Stage stage) //Opens a file explorer to find an image
     {
         FileChooser openfile = new FileChooser(); //Creates instance of file explorer
         openfile.setTitle("Open Image");
