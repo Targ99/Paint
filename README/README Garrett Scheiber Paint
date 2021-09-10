@@ -1,15 +1,37 @@
+------------------------------------------------------------------------
 Garrett Scheiber Pain(t)
-Version: 0.001
-	Date: 09/09/2021
-	New Features:
-		GUI
-		Opening an image of JPEG or PNG format through file explorer
-	Known Issues:
-		Next image will appear below former when inserted
-		First image fits within window, but subsequent images may not
-	Expected Next Sprint:
-		Scroll bars
-		Better scene/stage organization within code and files
-	Links:
-        GitHub: https://github.com/Targ99/Paint
-Version
+------------------------------------------------------------------------
+Language: JavaFX
+Description: An implementation of a simple raster graphics editor
+    through a JavaFX GUI
+Links:
+    GitHub: https://github.com/Targ99/Paint
+    Email: garrett.scheiber@valpo.edu
+------------------------------------------------------------------------
+Version: 0.001      Date: 09/10/2021
+	-New Features:
+		GUI:
+		    Opens an image of JPEG or PNG format through file explorer
+		    Rejects unusable file formats and displays an error message
+		    Adjusts first image size to fit within window
+	-Known Issues:
+		Image-Related:
+		    Next image will appear below former when inserted
+		    First image fits within window, but subsequent images may not
+		Miscellaneous:
+    		File format error message does not give acceptable formats
+	    	Title of the window is "Multiplier"
+	-Expected Next Sprint:
+	    Code-Related:
+	        Better scene/stage organization within code and files
+        	Better package organization
+        	Add more image formats (BMP, GIF)
+            Add another class for image format checking
+            May incorporate
+        GUI-Related:
+            Add different window icon
+        	Expand top menu bar utilities
+		    Add scroll bars
+	        Change the file type error message to a pop-up
+		    Include acceptable image formats in the error message
+------------------------------------------------------------------------

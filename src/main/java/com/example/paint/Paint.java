@@ -1,5 +1,5 @@
 package com.example.paint;
-
+//PixelReader + PixelWriter + WritableImage
 import javafx.application.Application; //Imports
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +10,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -18,6 +20,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+//import javafx.scene.image.PixelReader; //Helpful libraries that will be useful later
+//import javafx.scene.image.PixelWriter;
+//import javafx.scene.image.WritableImage;
 
 public class Paint extends Application
 {
@@ -31,6 +36,8 @@ public class Paint extends Application
     {
         window.setHeight(height); //Setting stage height + width
         window.setWidth(width);
+//        window.getIcons().add(new Image("/path/to/stackoverflow.jpg")); //For window icon
+        fileextension.setFill(Color.RED);
         Menu menuFile = new Menu("File"); //instantiating the new menus
         Menu menuEdit = new Menu("Edit");
         MenuItem open = new MenuItem("Open");
@@ -42,10 +49,10 @@ public class Paint extends Application
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
         topbar.getMenus().setAll(menuFile, menuEdit); //Adds menus to a menu bar
         VBox menuBox = new VBox(topbar); //Adds the menu to a VBox
-        root.getChildren().addAll(topbar);
-        Scene Defaultscene = new Scene(root);
-        window.setTitle("Multiplier");
-        window.setScene(Defaultscene);
+        root.getChildren().addAll(topbar, fileextension);
+        Scene Defaultscene = new Scene(root); //Creates the default scene
+        window.setTitle("GS Paint");
+        window.setScene(Defaultscene); //Activates the default scene
         window.show(); //Constructs the stage
     }
 
@@ -81,15 +88,17 @@ public class Paint extends Application
 //                System.out.print(image.getHeight());
             }
             else
-            {
-                fileextension.setText("File Type Not Supported"); //Case if unaccepted format
-//                fileextension.setText(extension);
+            {   //Case if unaccepted format
+                fileextension.setText("File Type Not Supported");
+                fileextension.setFont(Font.font(15));
+
+//                fileextension.setText(extension); //Used for file extension checking
 //                System.out.print(extension);
             }
         }
-        catch (IOException e)
+        catch (IOException e) //Case if format checking fails
         {
-            fileextension.setText("File Extension not Recognized"); //Case if format checking fails
+            fileextension.setText("File Extension not Recognized");
         }
     }
 
