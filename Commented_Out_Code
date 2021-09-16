@@ -1,0 +1,28 @@
+//import java.util.List;
+//import javafx.scene.image.PixelReader; //Helpful libraries that will be useful later
+//import javafx.scene.image.PixelWriter;
+//import javafx.scene.image.WritableImage;
+//    private int numimages = 0;
+//    private MenuItem image1 = new MenuItem("Image Not Used");
+//    private MenuItem image2 = new MenuItem("Image Not Used");
+//    private MenuItem image3 = new MenuItem("Image Not Used");
+//    private MenuItem image4 = new MenuItem("Image Not Used");
+        //remove.getItems().addAll(image1, image2, image3, image4);
+        //SeparatorMenuItem separator = new SeparatorMenuItem();
+//        image1.setDisable(true);
+//        image2.setDisable(true);
+//        image3.setDisable(true);
+//        image4.setDisable(true);
+//        image1.setOnAction(new EventHandler<ActionEvent>() {
+//            public void handle(ActionEvent actionEvent) { remenu(image1); }});
+//        image2.setOnAction(new EventHandler<ActionEvent>() {
+//            public void handle(ActionEvent actionEvent) { remenu(image2); }});
+//        image3.setOnAction(new EventHandler<ActionEvent>() {
+//            public void handle(ActionEvent actionEvent) { remenu(image3); }});
+//        image4.setOnAction(new EventHandler<ActionEvent>() {
+//            public void handle(ActionEvent actionEvent) { remenu(image4); }});
+//    private void remenu(MenuItem menuitem) //constructor for a menu of remaining images in doc
+//    {
+//
+//        remove.getItems().remove(menuitem);
+//    }
