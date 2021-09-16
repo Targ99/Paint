@@ -26,3 +26,68 @@
 //
 //        remove.getItems().remove(menuitem);
 //    }
+
+//                totalWidth = (totalWidth + f);
+//                switch (numimages)
+//                {
+//                    case 0:
+//                        image1.setText("filename");
+//                        image1.setDisable(false);
+//                        break;
+//                    case 1:
+//                        image2.setText("filename");
+//                        image2.setDisable(false);
+//                        break;
+//                    case 2:
+//                        image3.setText("filename");
+//                        image3.setDisable(false);
+//                        break;
+//                    case 3:
+//                        image4.setText("filename");
+//                        image4.setDisable(false);
+//                    default:
+//                        fileextension.setText("No More Images Left to Delete");
+//                        fileextension.setFont(Font.font(15));;
+//                        break;
+//                }
+////                window.setWidth(totalWidth);
+////                picdisplay.getScene().getWindow().sizeToScene();
+////                window.sizeToScene();
+
+//    public ImageView openimg(File filename, Stage stage) throws FileNotFoundException //Opens file found in findimg()
+//    {
+//            if(isIMG(filename,stage))
+//            {
+//                try {
+//                    InputStream stream = new FileInputStream(filename);
+//                    Image image = new Image(stream); //instantiating image from file name
+//                    ImageView imageView = new ImageView();
+//                    imageView.setImage(image);
+//                    if (image.getWidth() > image.getHeight()) //Attempt to fix oversized image
+//                    {
+//                        imageView.setFitWidth(new view().getWidth() * 0.45);
+//                    } else {
+//                        imageView.setFitHeight(new view().getHeight() * 0.45);
+//                    }
+//                    imageView.setPreserveRatio(true); //Preserve the original aspect ratio
+//                    return imageView;
+//                }
+//                catch(IOException e)
+//                {
+//
+//                }
+//
+//            }
+//            else
+//            {   //Case if unaccepted format
+//
+////                fileextension.setText(extension); //Used for file extension checking
+////                System.out.print(extension);
+//                return;
+//            }
+////        }
+////        catch (IOException e) //Case if format checking fails
+////        {
+////            error errorMSG = new error("File Extension not Recognized", stage);
+//        }
+//}

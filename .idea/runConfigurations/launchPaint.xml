@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Paint" type="Application" factoryName="Application" nameIsGenerated="true">
-    <option name="MAIN_CLASS_NAME" value="Paint.Paint" />
+  <configuration default="false" name="launchPaint" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="Paint.launchPaint" />
     <module name="Paint" />
     <extension name="coverage">
       <pattern>
