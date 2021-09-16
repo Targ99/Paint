@@ -1,8 +1,6 @@
-module com.example.paint {
+module Paint.Paint {
     requires javafx.controls;
     requires javafx.fxml;
-
-
-    opens com.example.paint to javafx.fxml;
-    exports com.example.paint;
+    exports Paint;
+    opens Paint to javafx.fxml;
 }

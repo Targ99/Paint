@@ -1,79 +1,43 @@
-package com.example.paint;
-//PixelReader + PixelWriter + WritableImage
-import javafx.application.Application; //Imports
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
+package Paint.setup;
+
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
+public class img {
 
-public class Paint extends Application
-{
 
     private Menu remove;
     private float totalWidth = 700;
-    private float width = 900; //Class vars for height + width
-    private float height = 700;
-    private Text fileextension = new Text(" "); //Text for exception handling
-    private VBox root = new VBox(); //Vbox addressable by multiple functions
-    private HBox picdisplay = new HBox(); //HBox for picture display
-    Stage window;
-//    @Override
-    public void start(Stage window)
-    {
-        window.setHeight(height); //Setting stage height + width
-        window.setWidth(width);
-//      window.getIcons().add(new Image("/path/to/stackoverflow.jpg")); //For window icon
-        fileextension.setFill(Color.RED);
-        Menu menuFile = new Menu("File"); //instantiating the new menus
-        Menu menuEdit = new Menu("Edit");
-        MenuItem open = new MenuItem("Open");
-        Menu remove = new Menu("Remove");
+    private final float width = 900; //Class vars for height + width
+    private final float height = 700;
+    private final Text fileextension = new Text(" "); //Text for exception handling
+    private final VBox root = new VBox(); //Vbox addressable by multiple functions
+    private final HBox picdisplay = new HBox(); //HBox for picture display
 
 
-        open.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) { findimg(window); }});
-
-
-        MenuItem insert = new MenuItem("Insert");
-        menuFile.getItems().addAll(open,insert, remove); //Adds open, insert, remove to file dropdown
-        MenuBar topbar = new MenuBar(); //instantiates a menu bar
-        topbar.getMenus().setAll(menuFile, menuEdit); //Adds menus to a menu bar
-        VBox menuBox = new VBox(topbar); //Adds the menu to a VBox
-        root.getChildren().addAll(topbar, fileextension, picdisplay);
-        Scene Defaultscene = new Scene(root); //Creates the default scene
-        window.setTitle("GS Paint");
-        window.setScene(Defaultscene); //Activates the default scene
-        window.show(); //Constructs the stage
-    }
-
-    private void findimg(Stage stage) //Opens a file explorer to find an image
+     public void findimg(Stage stage) //Opens a file explorer to find an image
     {
         FileChooser openfile = new FileChooser(); //Creates instance of file explorer
         openfile.setTitle("Open Image");
         File filename = openfile.showOpenDialog(stage); //Records the file to be opened
-        openimg(filename); //Calling openimg() to open the file
+        new img().openimg(filename, stage); //Calling openimg() to open the file
     }
 
 
-    private void openimg(File filename) //Opens file found in findimg()
+    public void openimg(File filename, Stage stage) //Opens file found in findimg()
     {
         try{ //Checking if the image is an accepted format
             String extension = Files.probeContentType(filename.toPath());
@@ -133,10 +97,5 @@ public class Paint extends Application
         {
             fileextension.setText("File Extension not Recognized");
         }
-    }
-
-    public static void main(String[] args) //Main
-    {
-        launch(args);
     }
 }

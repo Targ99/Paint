@@ -1,8 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Paint" type="Application" factoryName="Application" nameIsGenerated="true">
-    <option name="MAIN_CLASS_NAME" value="com.example.paint.Paint" />
+    <option name="MAIN_CLASS_NAME" value="Paint.Paint" />
     <module name="Paint" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.example.paint.*" />
