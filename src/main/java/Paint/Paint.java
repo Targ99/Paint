@@ -1,4 +1,4 @@
-package com.example.paint;
+package Paint;
 //PixelReader + PixelWriter + WritableImage
 import javafx.application.Application; //Imports
 import javafx.event.ActionEvent;
@@ -32,7 +32,7 @@ public class Paint extends Application
     private float totalWidth = 700;
     private float width = 900; //Class vars for height + width
     private float height = 700;
-//    private Text file = new Text(" ");
+    //private Text file = new Text(" ");
     private Text fileextension = new Text(" "); //Text for exception handling
     private VBox root = new VBox(); //Vbox addressable by multiple functions
     private HBox picdisplay = new HBox(); //HBox for picture display
