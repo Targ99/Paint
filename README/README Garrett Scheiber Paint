@@ -8,6 +8,30 @@ Links:
     GitHub: https://github.com/Targ99/Paint
     Email: garrett.scheiber@valpo.edu
 ------------------------------------------------------------------------
+Version 0.002      Date: 09/17/2021
+    -New Features:
+        GUI:
+            Help and About windows added to the primary menu
+            Error window for unsupported file types
+            Image "save" and "save as" through file explorer
+            Current save location storage
+            Color chooser in primary menu
+        Code:
+            Improved file/class organization
+            Paint main and launcher files
+            Main view constructor
+            Alternate windows for errors/about/help
+    -Fixed Issues:
+            Error message window format
+            Window title
+    -Known Issues:
+            Color chooser has no effect on objects yet
+            Help window appears, but needs populated
+    -Expected Next Sprint:
+            Canvas modification
+            Clear board function
+            Color chooser effectiveness
+------------------------------------------------------------------------
 Version: 0.001      Date: 09/10/2021
 	-New Features:
 		GUI:
@@ -28,7 +52,6 @@ Version: 0.001      Date: 09/10/2021
         	Better package organization
         	Add more image formats (BMP, GIF)
             Add another class for image format checking
-            May incorporate
         GUI-Related:
             Add a clear board function
             Add different window icon
@@ -37,9 +60,3 @@ Version: 0.001      Date: 09/10/2021
 	        Change the file type error message to a pop-up
 		    Include acceptable image formats in the error message
 ------------------------------------------------------------------------
-Version 0.002      Date: 09/17/2021
-    -New Features:
-
-    -Known Issues:
-
-    Expected Next Sprint:

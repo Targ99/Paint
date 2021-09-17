@@ -5,19 +5,16 @@ import Paint.setup.view;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+//Good for now//
 
 public class Paint extends Application
 {
-    //public view mainview = new view();
+
     @Override
     public void start(Stage window)
     {
         new view().setupPaint(window);
     }
-//    public view getView()
-//    {
-//        return mainview;
-//    }
 
     public static void main(String[] args) //Main
     {

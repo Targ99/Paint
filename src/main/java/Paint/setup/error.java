@@ -1,19 +1,15 @@
 package Paint.setup;
 
-import static java.util.stream.Collectors.joining;
-import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.util.List;
+//Good for now//
 
 public class error{
 
@@ -26,29 +22,29 @@ public class error{
         this.stage = stage;
     }
 
-
-
-    public void errorwindow() {
+    public void errorwindow()
+    {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(stage);
         dialog.setTitle("Error");
         VBox box = new VBox();
-        Text title = new Text("Wrong File Format");
-        box.getChildren().add(title);
-        Label errorLabel = new Label(errors);
-        box.getChildren().add(errorLabel);
+        Text title = new Text("File Format Not Supported");
+        Text errorLabel = new Text(errors);
+        Text space1 = new Text(" ");
+        Text space2 = new Text(" ");
+        title.setTextAlignment(TextAlignment.CENTER);
+        errorLabel.setTextAlignment(TextAlignment.CENTER);
         Button exitButton = new Button("OK");
+        exitButton.setAlignment(Pos.CENTER);
         exitButton.setOnAction(event -> dialog.close());
-        ButtonBar buttonBar = new ButtonBar();
-        buttonBar.getButtons().add(exitButton);
-        box.getChildren().add(buttonBar);
-
+        box.getChildren().addAll(title,space1, errorLabel,space2, exitButton);
+        box.setAlignment(Pos.CENTER);
         Scene dialogScene = new Scene(box);
         dialog.setScene(dialogScene);
-        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.setHeight(150);
+        dialog.setWidth(300);
         dialog.show();
     }
-
 }
 

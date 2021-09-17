@@ -1,8 +1,5 @@
 package Paint.setup;
 
-import Paint.Paint;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
@@ -13,12 +10,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,20 +32,13 @@ import javafx.scene.image.WritableImage;
 
 public class view
 {
-//    public img image = new img();
+//    public final img image = new img();
     public Rectangle2D scsize = Screen.getPrimary().getBounds();
     public int width = (int)scsize.getWidth();
     public int height = (int)scsize.getHeight(); //Class vars for height + width
     public Text fileextension = new Text(" "); //Text for exception handling
     public HBox picdisplay = new HBox(); //HBox for picture display
-//    public float getHeight()
-//    {
-//        return height;
-//    }
-//    public float getWidth()
-//    {
-//        return width;
-//    }
+    public File currentFile = null;
 
     public void setupPaint(Stage window)
     {
@@ -60,7 +51,6 @@ public class view
         root.getChildren().addAll(menuBox, fileextension, picdisplay);
         window.setMaximized(true);
 //      window.getIcons().add(new Image("/path/to/stackoverflow.jpg")); //For window icon
-//        fileextension.setFill(Color.RED);
         Scene Defaultscene = new Scene(root); //Creates the default scene
         window.setScene(Defaultscene); //Activates the default scene
         window.show(); //Constructs the stage
@@ -71,10 +61,10 @@ public class view
         try
         {
             InputStream stream = new FileInputStream(file);
-            Image image = new Image(stream); //instantiating image from file name
+            Image imag = new Image(stream); //instantiating image from file name
             ImageView imageView = new ImageView();
-            imageView.setImage(image);
-            if (image.getWidth() > image.getHeight()) //Attempt to fix oversized image
+            imageView.setImage(imag);
+            if (imag.getWidth() > imag.getHeight()) //Attempt to fix oversized image
             {
                 imageView.setFitWidth(width * 0.45);
             } else {
@@ -95,6 +85,7 @@ public class view
         FileChooser openfile = new FileChooser(); //Creates instance of file explorer
         openfile.setTitle("Open Image");
         File filename = openfile.showOpenDialog(stage); //Records the file to be opened
+
         if (isIMG(filename, stage))
         {
             addImage(filename, stage); //Calling addImage() to open the file
@@ -104,16 +95,70 @@ public class view
     public boolean isIMG(File filename, Stage stage) {
         try {
             String extension = Files.probeContentType(filename.toPath());
-            if (extension.equals("image/jpeg") || extension.equals("image/png")) {
-                return true;
-            } else {   //Case if unaccepted format
+            if (extension.equals("image/jpeg") || extension.equals("image/png")) {return true;}
+
+            else {   //Case if unaccepted format
                 error errorMSG = new error("Image Must be of PNG or JPEG Format", stage);
+                errorMSG.errorwindow();
                 return false;
             }
-        } catch (IOException e) //Case if format checking fails
+        }
+        catch (IOException e) //Case if format checking fails
         {
             error errorMSG = new error("File Extension not Recognized", stage);
+            errorMSG.errorwindow();
             return false;
+        }
+    }
+
+    public void save(Stage stage, File destination)
+    {
+        if(currentFile == null)
+        {
+            saveAs(stage);
+        }
+        else
+        {
+            String extension = null;
+            try {
+                extension = Files.probeContentType(destination.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            assert extension != null;
+            String format = extension.substring(6);
+            BufferedImage bImage = null;
+            try {
+                bImage = ImageIO.read(destination);
+                ImageIO.write(bImage, format, destination);
+
+            } catch (IOException e) {
+                System.out.println("Exception occured :" + e.getMessage());
+            }
+            System.out.println("Images were written succesfully.");
+        }
+    }
+
+    public void saveAs(Stage stage)
+    {
+        FileChooser savefile = new FileChooser(); //Creates instance of file explorer
+        savefile.setTitle("Save As");
+        currentFile = savefile.showSaveDialog(stage);
+        String extension = null;
+        try {
+            extension = Files.probeContentType(currentFile.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert extension != null;
+        String format = extension.substring(6);
+        BufferedImage bImage = null;
+        try {
+            bImage = ImageIO.read(currentFile);
+            ImageIO.write(bImage, format, currentFile);
+
+        } catch (IOException e) {
+            System.out.println("Exception occured :" + e.getMessage());
         }
     }
 
@@ -121,29 +166,26 @@ public class view
     {
         Menu menuFile = new Menu("File"); //Instantiating the new menus
         Menu menuEdit = new Menu("Edit");
-        Menu menuAbout = new Menu("About");
         Menu menuHelp = new Menu("Help");
         Menu menuDraw = new Menu("Draw");
         MenuItem open = new MenuItem("Open");
         MenuItem save = new MenuItem("Save");
         MenuItem saveas = new MenuItem("Save As");
+        MenuItem help = new MenuItem("Help");
+        MenuItem about = new MenuItem("About");
         MenuItem drawline = new MenuItem("Line");
-        //menuHelp.setOnAction(event -> new helpPage().display());
-        //menuAbout.setOnAction(event -> new aboutPage().display());
-        open.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent actionEvent)
-            {
-                findimg(stage);
-            }
-        });
         MenuItem insert = new MenuItem("Insert");
+        help.setOnAction(event -> new helpPage(stage).displayHelp());
+        about.setOnAction(event -> new aboutPage(stage).displayAbout());
+        saveas.setOnAction(event-> saveAs(stage));
+        save.setOnAction(event-> save(stage, currentFile));
+        open.setOnAction(actionEvent -> findimg(stage));
+        menuHelp.getItems().addAll(help, about);
         menuFile.getItems().addAll(open, insert, save, saveas);
-        menuDraw.getItems().addAll(drawline);
+        menuDraw.getItems().add(drawline);
         //Adds open, insert, save, saveas to file dropdown
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
-        topbar.getMenus().addAll(menuFile, menuEdit, menuAbout, menuHelp);
+        topbar.getMenus().addAll(menuFile, menuEdit, menuHelp, menuDraw);
         //Adds file, edit, about, help menus to a menu bar
         return topbar;
     }
