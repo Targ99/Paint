@@ -1,21 +1,31 @@
 package Paint.setup;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Orientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,21 +34,57 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 
+
+
 /*
 import javafx.scene.image.PixelReader; //Helpful libraries that will be useful later
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 */
 
+class ResizableCanvas extends Canvas {
+
+//    public ResizableCanvas() {
+//        // Redraw canvas when size changes.
+//        widthProperty().addListener(evt -> draw());
+//        heightProperty().addListener(evt -> draw());
+//    }
+
+    private void draw() {
+        double width = getWidth();
+        double height = getHeight();
+    }
+
+    @Override
+    public boolean isResizable() {
+        return true;
+    }
+
+//    @Override
+//    public double prefWidth(double height) {
+//        return getWidth();
+//    }
+//
+//    @Override
+//    public double prefHeight(double width) {
+//        return getHeight();
+//    }
+}
+
 public class view
 {
-//    public final img image = new img();
+
+
+    Scrollbar x = new Scrollbar();
+    Scrollbar y = new Scrollbar();
     public Rectangle2D scsize = Screen.getPrimary().getBounds();
-    public int width = (int)scsize.getWidth();
-    public int height = (int)scsize.getHeight(); //Class vars for height + width
+    public double linewidth = 5;
     public Text fileextension = new Text(" "); //Text for exception handling
-    public HBox picdisplay = new HBox(); //HBox for picture display
+    public StackPane picdisplay = new StackPane(); //HBox for picture display
     public File currentFile = null;
+    private ResizableCanvas canvas = new ResizableCanvas();
+    private Line curLine;
+    Pane drawingPane = new Pane();
 
     public void setupPaint(Stage window)
     {
@@ -48,10 +94,60 @@ public class view
         HBox menuBox = new HBox(10); //Adds the menu to a HBox
         menuBox.getChildren().addAll(topbar, colorwheel);
         VBox root = new VBox();
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.GRAY);
+        drawingPane.setPrefSize(800, 800);
+        drawingPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        ScrollPane scrollPane = new ScrollPane(root);
+        scrollPane.setPrefSize(300, 300);
+        scrollPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setStyle("-fx-focus-color: transparent;");
+
+        drawingPane.setOnMousePressed(event -> {
+            if (!event.isPrimaryButtonDown()) {
+                return;
+            }
+
+            curLine = new Line(
+                    event.getX(), event.getY(),
+                    event.getX(), event.getY()
+            );
+            curLine.setStrokeWidth(linewidth);
+            drawingPane.getChildren().add(curLine);
+        });
+
+        drawingPane.setOnMouseDragged(event -> {
+            if (!event.isPrimaryButtonDown()) {
+                return;
+            }
+
+            if (curLine == null) {
+                return;
+            }
+            curLine.setStrokeWidth(linewidth);
+            curLine.setEndX(event.getX());
+            curLine.setEndY(event.getY());
+
+            double mx = Math.max(curLine.getStartX(), curLine.getEndX());
+            double my = Math.max(curLine.getStartY(), curLine.getEndY());
+
+            if (mx > drawingPane.getMinWidth()) {
+                drawingPane.setMinWidth(mx);
+            }
+
+            if (my > drawingPane.getMinHeight()) {
+                drawingPane.setMinHeight(my);
+            }
+        });
+
+        drawingPane.setOnMouseReleased(event -> curLine = null);
+        picdisplay.getChildren().add(drawingPane);
         root.getChildren().addAll(menuBox, fileextension, picdisplay);
         window.setMaximized(true);
+        Scene Defaultscene = new Scene(scrollPane); //Creates the default scene
 //      window.getIcons().add(new Image("/path/to/stackoverflow.jpg")); //For window icon
-        Scene Defaultscene = new Scene(root); //Creates the default scene
         window.setScene(Defaultscene); //Activates the default scene
         window.show(); //Constructs the stage
     }
@@ -64,14 +160,10 @@ public class view
             Image imag = new Image(stream); //instantiating image from file name
             ImageView imageView = new ImageView();
             imageView.setImage(imag);
-            if (imag.getWidth() > imag.getHeight()) //Attempt to fix oversized image
-            {
-                imageView.setFitWidth(width * 0.45);
-            } else {
-                imageView.setFitHeight(height * 0.45);
-            }
+            imageView.setFitHeight(0.75*stage.getHeight());
+            imageView.setFitWidth(0.75*stage.getWidth());
             imageView.setPreserveRatio(true); //Preserve the original aspect ratio
-            picdisplay.getChildren().add(imageView);
+            drawingPane.getChildren().add(imageView);
         }
         catch(IOException e)
         {
@@ -119,18 +211,11 @@ public class view
         }
         else
         {
-            String extension = null;
             try {
-                extension = Files.probeContentType(destination.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            assert extension != null;
-            String format = extension.substring(6);
-            BufferedImage bImage = null;
-            try {
-                bImage = ImageIO.read(destination);
-                ImageIO.write(bImage, format, destination);
+                WritableImage snapshot = drawingPane.snapshot(new SnapshotParameters(), null);
+                BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
+                assert bImage != null;
+                ImageIO.write(bImage, "png", destination);
 
             } catch (IOException e) {
                 System.out.println("Exception occured :" + e.getMessage());
@@ -144,19 +229,11 @@ public class view
         FileChooser savefile = new FileChooser(); //Creates instance of file explorer
         savefile.setTitle("Save As");
         currentFile = savefile.showSaveDialog(stage);
-        String extension = null;
         try {
-            extension = Files.probeContentType(currentFile.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assert extension != null;
-        String format = extension.substring(6);
-        BufferedImage bImage = null;
-        try {
-            bImage = ImageIO.read(currentFile);
-            ImageIO.write(bImage, format, currentFile);
-
+            WritableImage snapshot = drawingPane.snapshot(new SnapshotParameters(), null);
+            BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
+            assert bImage != null;
+            ImageIO.write(bImage, "png", currentFile);
         } catch (IOException e) {
             System.out.println("Exception occured :" + e.getMessage());
         }
@@ -174,15 +251,17 @@ public class view
         MenuItem help = new MenuItem("Help");
         MenuItem about = new MenuItem("About");
         MenuItem drawline = new MenuItem("Line");
+        MenuItem lineW = new MenuItem("Line Width");
         MenuItem insert = new MenuItem("Insert");
         help.setOnAction(event -> new helpPage(stage).displayHelp());
         about.setOnAction(event -> new aboutPage(stage).displayAbout());
+        lineW.setOnAction(event -> linewidth = new LineWidth(stage).getLineW());
         saveas.setOnAction(event-> saveAs(stage));
         save.setOnAction(event-> save(stage, currentFile));
         open.setOnAction(actionEvent -> findimg(stage));
         menuHelp.getItems().addAll(help, about);
         menuFile.getItems().addAll(open, insert, save, saveas);
-        menuDraw.getItems().add(drawline);
+        menuDraw.getItems().addAll(drawline, lineW);
         //Adds open, insert, save, saveas to file dropdown
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
         topbar.getMenus().addAll(menuFile, menuEdit, menuHelp, menuDraw);
