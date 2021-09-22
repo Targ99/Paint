@@ -34,6 +34,8 @@ import java.nio.file.Files;
 import javafx.scene.image.PixelReader; //Helpful libraries that will be useful later
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+stage.setOnClose?
+getColor(x,y)
 */
 
 

@@ -44,19 +44,10 @@ public class canvas extends ScrollPane{
 //    @Override
     public ScrollPane displaycanvas(Stage stage)
     {
-
-//        Pane drawingPane = new Pane();
-//        Scrollbar x = new Scrollbar();
-//        Scrollbar y = new Scrollbar();
-        //    private double drawWidth;
-        //    private double drawHeight;
-
-//        scrollPane.setPrefSize(300, 300);
         scrollPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
-//        scrollPane.setStyle("-fx-focus-color: transparent;");
-//        drawingPane.setPrefSize(800, 800);
+
         drawingPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         drawingPane.setOnMousePressed(event -> {
             if (!event.isPrimaryButtonDown()) {
@@ -100,14 +91,6 @@ public class canvas extends ScrollPane{
         picdisplay.getChildren().add(drawingPane);
         return scrollPane;
     }
-
-//    public void setDrawHeight(double drawHeight) {
-//        this.drawHeight = drawHeight;
-//    }
-
-//    public void setDrawWidth(double drawWidth) {
-//        this.drawWidth = drawWidth;
-//    }
 
     public void save(Stage stage, File destination)//Default save with existing save location
     {
