@@ -31,6 +31,7 @@ Version 0.002      Date: 09/17/2021
             Color chooser has no effect on objects yet
             Help window appears, but needs populated
             Scroll allows top menu hidden
+            Scroll acts weird sometimes
     -Expected Next Sprint:
             Canvas modification
             Clear board function
