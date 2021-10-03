@@ -1,62 +1,45 @@
 package Paint.setup;
 
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Screen;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
+import java.util.Optional;
 
-/*
-import javafx.scene.image.PixelReader; //Helpful libraries that will be useful later
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
-stage.setOnClose?
-getColor(x,y)
-*/
-
-
-public class view
+public class view<privtae>
 {
-    public view(Stage window)
+    private allPrefs prefs;
+    private Stage window;
+
+    public view(Stage windo)
     {
+        prefs = new allPrefs(windo);
+        window = windo;
         window.setTitle("GS Paint");
-        canvas canva = new canvas();
-        ScrollPane displayCanvas = canva.displaycanvas(window);
-        topBar topMenu = new topBar();
-        HBox displayTop = topMenu.displayTB(window);
-        allPrefs prefs = new allPrefs();
-        topMenu.setlinks(canva, prefs);
-        canva.setlinks(topMenu, prefs);
-//        window.setMaximized(true);
-        VBox viewBox = new VBox();
-        viewBox.getChildren().addAll(displayTop, displayCanvas);
-        Scene dscene = new Scene(viewBox); //Creates the default scene
-//      window.getIcons().add(new Image("")); //For window icon
+        Scene dscene = prefs.build();
         window.setScene(dscene); //Activates the default scene
+        window.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         window.show(); //Constructs the stage
     }
+
+    private void closeWindowEvent(WindowEvent event)
+    {
+        System.out.println("Window close request ...");
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getButtonTypes().remove(ButtonType.OK);
+        alert.getButtonTypes().add(ButtonType.CANCEL);
+        alert.getButtonTypes().add(ButtonType.YES);
+        alert.setTitle("Quit application");
+        alert.setContentText(String.format("Close without saving?"));
+        alert.initOwner(window.getOwner());
+        Optional<ButtonType> res = alert.showAndWait();
+        if(res.isPresent()) {
+            if(res.get().equals(ButtonType.CANCEL))
+                event.consume();
+        }
+    }
+
 }

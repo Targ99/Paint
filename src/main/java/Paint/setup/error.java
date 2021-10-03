@@ -11,22 +11,20 @@ import javafx.stage.Stage;
 
 //Good for now//
 
-public class error{
+public class error extends allPrefs{
 
     private String errors;
-    private Stage stage;
 
     public error (String errors, Stage stage)
     {
         this.errors = errors;
-        this.stage = stage;
     }
 
     public void errorwindow()
     {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.initOwner(stage);
+        dialog.initOwner(mainStage);
         dialog.setTitle("Error");
         VBox box = new VBox();
         Text title = new Text("File Format Not Supported");

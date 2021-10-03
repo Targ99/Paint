@@ -9,10 +9,11 @@ import javafx.stage.Stage;
 
 public class Paint extends Application
 {
+
     @Override
     public void start(Stage window)
     {
-        view mainView = new view(window);
+        new view(window);
     }
 
     public static void main(String[] args) //Main

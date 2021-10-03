@@ -10,20 +10,20 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 //Good for now//
 
-public class helpPage{
+public class helpPage extends allPrefs{
 
-    private Stage stage;
+    private allPrefs prefs;
 
-    public helpPage (Stage stage)//default constructor
+    public helpPage(allPrefs pref)
     {
-        this.stage = stage;
+        prefs = pref;
     }
 
     public void displayHelp()
     {
         Stage dialog = new Stage();
         dialog.initModality(Modality.NONE);
-        dialog.initOwner(stage);
+        dialog.initOwner(mainStage);
         dialog.setTitle("Help");
         Text title = new Text("Help Page");
         Text message = new Text("IDK what to put here yet...");
