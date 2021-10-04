@@ -62,9 +62,9 @@ public class drawChoice {
         disp.add(rb10, 1, 3, 1, 1);
         disp.add(rb11, 1, 4, 1, 1);
         disp.add(rb12, 1, 5, 1, 1);
-        disp.add(rb13, 0, 6, 1, 1);
-        disp.add(rb14, 1, 6, 1, 1);
-        disp.add(rb15, 0, 7, 1, 1);
+        disp.add(rb13, 0, 6, 1, 1); // reg
+        disp.add(rb14, 1, 6, 1, 1); // mine
+        disp.add(rb15, 0, 7, 1, 1); // erase
 
         past = rb1;
         return disp;

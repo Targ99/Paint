@@ -14,7 +14,8 @@ import javafx.scene.text.Text;
 public class prefMenu {
     private allPrefs prefs;
     private ColorPicker colorpick, strokepick;
-    private Label colorLabel, strokeLabel, size;
+    private Label colorLabel, strokeLabel, size, sides;
+    private Slider side, slide;
 
     public prefMenu(allPrefs pref)
     {
@@ -31,11 +32,13 @@ public class prefMenu {
         colorLabel = new Label(colorString(prefs.getDrawColor()));
         strokeLabel = new Label(colorString(prefs.getStrokeColor()));
         size = new Label("Size = " + prefs.getDrawWidth());
+        sides = new Label("Sides : " + prefs.getNumsides());
         strokepick.setOnAction(event -> strokeAct());
         colorpick.setOnAction(event-> colorAct());
         GridPane markers = new drawChoice(prefs).build();
-        Slider slide = buildSlider();
-        drawprefs.getChildren().addAll(title, colorpick, colorLabel, strokepick, strokeLabel, markers, slide);
+        Slider slide = buildSlider(prefs.getDrawWidth(), 0);
+        Slider side = buildSlider(prefs.getNumsides(), 1);
+        drawprefs.getChildren().addAll(title, colorpick, colorLabel, strokepick, strokeLabel, markers, slide, size, side, sides);
         return drawprefs;
     }
 
@@ -65,25 +68,33 @@ public class prefMenu {
         return red + "\n" + green + "\n" + blue;
     }
 
-    public Slider buildSlider()
+    public Slider buildSlider(double value, int choice)
     {
         Slider slide = new Slider();
-        slide.setMin(0);
+        slide.setMin(3);
         slide.setMax(40);
         slide.setShowTickLabels(true);
         slide.setShowTickMarks(true);
         slide.setMajorTickUnit(5);
         slide.setMinorTickCount(1);
         slide.setBlockIncrement(1);
-        slide.setValue(prefs.getDrawWidth());
-        slide.valueProperty().addListener((observableValue, number, t1) -> wideAct((double) t1));
+        slide.setValue(value);
+        slide.valueProperty().addListener((observableValue, number, t1) -> wideAct((double) t1, choice));
         return slide;
     }
 
-    private void wideAct(double newW)
+    private void wideAct(double newW, int choice)
     {
-        prefs.setDrawWidth(newW);
-        size.setText("Size = " + newW);
+        if(choice == 0) {
+            prefs.setDrawWidth(newW);
+            size.setText("Size = " + (int)newW);
+        }
+        else
+        {
+            int inewW = (int)newW;
+            prefs.setNumsides(inewW);
+            sides.setText("Sides : " + inewW);
+        }
     }
 
 }

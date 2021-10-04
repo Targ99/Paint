@@ -20,6 +20,7 @@ public class allPrefs{
     private taB currTab;
     private Canvas currCanv;
     private int drawType = 0;
+    private int numsides = 4;
     private Color drawColor = Color.BLACK;
     private Color strokeColor = Color.BLACK;
     private double drawWidth = 10;
@@ -45,6 +46,10 @@ public class allPrefs{
     public int getDrawType() {return drawType;}
     public taB getCurrTab() {return currTab;}
 
+    public int getNumsides() {
+        return numsides;
+    }
+
     public void setCurrTab(taB currTab) {this.currTab = currTab;}
     public void setCurrentFile(File currentFile) {this.currentFile = currentFile;}
     public void setDrawWidth(double drawWidth) {this.drawWidth = drawWidth;}
@@ -54,7 +59,10 @@ public class allPrefs{
     public void setTabCont(TabPane tabcont) {tabCont = tabcont;}
     public void setCurrCanv(Canvas currCanv) {this.currCanv = currCanv;}
 
-// Getters and Setters //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    public void setNumsides(int numsides) {
+        this.numsides = numsides;
+    }
+    // Getters and Setters //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 }

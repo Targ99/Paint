@@ -42,7 +42,8 @@ public class drawCorners{
         }
     }
 
-    public void dragged(MouseEvent event) {
+    public void dragged(MouseEvent event)
+    {
         nums.setWasD(true);
         if (!nums.isDragging())
         {
@@ -92,6 +93,10 @@ public class drawCorners{
                 num = nums.getFinX() - nums.getPrevX();
                 num2 = nums.getFinY() - nums.getPrevY();
                 gc.strokeOval(nums.getPrevX(),nums.getPrevY(),num,num2);
+                break;
+            case 12:
+                uniRect makeR = new uniRect(prefs);
+                makeR.buildRect( nums.getPrevX(), nums.getPrevY(),nums.getFinX(), nums.getFinY());
                 break;
             default:
                 if(!nums.isWasD())
