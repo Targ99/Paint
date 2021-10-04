@@ -11,15 +11,18 @@ import javafx.stage.Stage;
 
 //Good for now//
 
-public class aboutPage extends allPrefs{
+public class aboutPage
+{
 
+    private allPrefs prefs;
+    public aboutPage(allPrefs pref){prefs = pref;}
 
     public void displayAbout()
     {
         //creating new stage and setting params
         Stage dialog = new Stage();
         dialog.initModality(Modality.NONE);
-        dialog.initOwner(mainStage);
+        dialog.initOwner(prefs.getWindow());
         dialog.setTitle("About Paint");
         //creating text items for information
         Text title1 = new Text("JavaFX Paint Implementation");

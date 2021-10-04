@@ -14,24 +14,24 @@ public class textWin
 {
 
     private allPrefs prefs;
-
-    private textWin(allPrefs pref)
-    {
-        prefs = pref;
-    }
-
-    private Stage stage;
+    private drawNums nums;
+    private GraphicsContext gc;
     private Stage dialog;
-    private double x, y, width;
     private TextField text;
+    private double x,y;
 
-
+    public textWin(allPrefs pref, drawNums n1)
+    {
+        nums = n1;
+        prefs = pref;
+        gc = prefs.getCurrCanv().getGraphicsContext2D();
+    }
 
     public void displayWin()
     {
         dialog = new Stage();
         dialog.initModality(Modality.NONE);
-        dialog.initOwner(stage);
+        dialog.initOwner(prefs.getWindow());
         dialog.setTitle("Enter Desired Text");
         Text space = new Text(" ");
         text = new TextField("Text:");
@@ -41,6 +41,8 @@ public class textWin
         exitButton.setAlignment(Pos.CENTER);
         exitButton.setPrefWidth(100);
         box.getChildren().addAll(text, space, exitButton);
+        x = nums.getPrevX();
+        y = nums.getPrevY();
         Scene defaultsc = new Scene(box);
         dialog.setScene(defaultsc);
         dialog.show();
@@ -49,11 +51,12 @@ public class textWin
     private void putText()
     {
         String input = text.getText();
+        System.out.println(input + nums.getPrevX() + nums.getPrevY());
+        gc.setLineWidth(prefs.getDrawWidth());
+        gc.setStroke(prefs.getDrawColor());
+        gc.setFill(prefs.getDrawColor());
+        gc.fillText(input, x,y);
         dialog.close();
-        gc.setLineWidth(drawWidth);
-        gc.setStroke(drawColor);
-        gc.setFill(drawColor);
-        gc.fillText(input, x, y, width);
     }
 
 }

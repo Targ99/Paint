@@ -6,58 +6,55 @@ import javafx.scene.input.MouseEvent;
 public class ChooseDraw
 {
     private allPrefs prefs;
+    private drawNums nums = new drawNums();
 
-    private ChooseDraw(allPrefs pref)
+    public ChooseDraw(allPrefs pref) {prefs = pref;}
+
+
+    void pressed(MouseEvent event)
     {
-        prefs = pref;
-    }
-    protected boolean dragging = false;
-    protected double prevX, prevY, finX, finY;
-
-    protected drawFree free;
-    protected drawCorners corners;
-    protected drawPixel pixel;
-
-    void presseda(MouseEvent event)
-    {
-        switch (drawType) {
+        switch (prefs.getDrawType()) {
             case 1:
-                new drawFree().pressed(event);
+                new drawFree(prefs, nums).pressed(event);
                 break;
             case 2, 3:
-                new drawPixel().pressed(event);
+                new drawPixel(prefs, nums).pressed(event);
                 break;
             default:
-                new drawCorners().pressed(event);
+                new drawCorners(prefs, nums).pressed(event);
                 break;
         }
     }
-    void draggeda(MouseEvent event)
+    void dragged(MouseEvent event)
     {
-        switch (drawType) {
+        switch (prefs.getDrawType()) {
             case 1:
-                new drawFree().dragged(event);
+                new drawFree(prefs, nums).dragged(event);
                 break;
             case 2, 3:
-                new drawPixel().dragged(event);
+                new drawPixel(prefs, nums).dragged(event);
                 break;
             default:
-                new drawCorners().dragged(event);
+                new drawCorners(prefs, nums).dragged(event);
                 break;
         }
     }
-    void releaseda(MouseEvent event)
+    void released(MouseEvent event)
     {
-        switch (drawType) {
+        switch (prefs.getDrawType()) {
             case 1:
-                dragging=false;
+                nums.setDragging(false);
                 break;
             case 2, 3:
-                new drawPixel().released(event);
+                new drawPixel(prefs, nums).released(event);
                 break;
             default:
-                new drawCorners().released(event);
+                new drawCorners(prefs, nums).released(event);
                 break;
         }
+        nums.setPrevX(0);
+        nums.setPrevY(0);
+        nums.setFinX(0);
+        nums.setFinY(0);
     }
 }

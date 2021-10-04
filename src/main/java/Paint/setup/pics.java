@@ -19,26 +19,26 @@ import java.nio.file.Files;
 public class pics{
 
     private allPrefs prefs;
+    private drawBoard board;
 
-    private pics(allPrefs pref)
+    public pics(allPrefs pref)
     {
         prefs = pref;
     }
 
-
     public void save()//Default save with existing save location
     {
-        if(currentFile == null)
+        if(prefs.getCurrentFile() == null)
         {
             saveAs();
         }
         else
         {
             try {
-                WritableImage snapshot = drawBrd.snapshot(new SnapshotParameters(), null);
+                WritableImage snapshot = prefs.getCurrCanv().snapshot(new SnapshotParameters(), null);
                 BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
                 assert bImage != null;
-                ImageIO.write(bImage, "png", currentFile);
+                ImageIO.write(bImage, "png", prefs.getCurrentFile());
 
             } catch (IOException e) {
                 System.out.println("Exception occured :" + e.getMessage());
@@ -51,41 +51,42 @@ public class pics{
     {
         FileChooser savefile = new FileChooser(); //Creates instance of file explorer
         savefile.setTitle("Save As");
-        currentFile = savefile.showSaveDialog(mainStage); //Changes default save location
+        prefs.setCurrentFile(savefile.showSaveDialog(prefs.getWindow())); //Changes default save location
+
         try {
-            WritableImage snapshot = drawBrd.snapshot(new SnapshotParameters(), null);
+            WritableImage snapshot = prefs.getCurrCanv().snapshot(new SnapshotParameters(), null);
             BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
             assert bImage != null;
-            ImageIO.write(bImage, "png", currentFile);
+            ImageIO.write(bImage, "png", prefs.getCurrentFile());
         } catch (IOException e) {
             System.out.println("Exception occured :" + e.getMessage());
         }
     }
 
-    public void addImage(File file, Stage stage, Canvas drawBrd)
+    public void addImage(File file, Stage stage)
     {
         try
         {
             InputStream stream = new FileInputStream(file);
             javafx.scene.image.Image imag = new Image(stream); //instantiating image from file name
-            GraphicsContext gc = drawBrd.getGraphicsContext2D();
-            gc.drawImage(imag, 0, 0, canvW, canvH);
+            GraphicsContext gc = prefs.getCurrCanv().getGraphicsContext2D();
+            gc.drawImage(imag, 0, 0, 100, 100);
         }
         catch(IOException e)
         {
-            error errorMSG = new error("Image Must be of PNG, GIF, or JPEG Format", mainStage);
-            errorMSG.errorwindow();
+            error errorMSG = new error("Image Must be of PNG, GIF, or JPEG Format", prefs.getWindow());
+            errorMSG.errorwindow(prefs);
         }
     }
     public void findimg() //Opens a file explorer to find an image
     {
         FileChooser openfile = new FileChooser(); //Creates instance of file explorer
         openfile.setTitle("Open Image");
-        File filename = openfile.showOpenDialog(mainStage); //Records the file to be opened
+        File filename = openfile.showOpenDialog(prefs.getWindow()); //Records the file to be opened
 
-        if (isIMG(filename, mainStage))
+        if (isIMG(filename, prefs.getWindow()))
         {
-            addImage(filename, mainStage, drawBrd); //Calling addImage() to open the file
+            addImage(filename, prefs.getWindow()); //Calling addImage() to open the file
         }
     }
 
@@ -96,15 +97,15 @@ public class pics{
             if (extension.equals("image/jpeg") || extension.equals("image/png") || extension.equals("image/gif")) {return true;}
 
             else {   //Case if unaccepted format
-                error errorMSG = new error("Image Must be of PNG, GIF, or JPEG Format", mainStage);
-                errorMSG.errorwindow();
+                error errorMSG = new error("Image Must be of PNG, GIF, or JPEG Format", prefs.getWindow());
+                errorMSG.errorwindow(prefs);
                 return false;
             }
         }
         catch (IOException e) //Case if format checking fails
         {
-            error errorMSG = new error("File Extension not Recognized", mainStage);
-            errorMSG.errorwindow();
+            error errorMSG = new error("File Extension not Recognized", prefs.getWindow());
+            errorMSG.errorwindow(prefs);
             return false;
         }
     }

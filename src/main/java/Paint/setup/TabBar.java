@@ -9,21 +9,22 @@ public class TabBar{
 
     private allPrefs prefs;
 
-    private TabBar(allPrefs pref)
+    public TabBar(allPrefs pref)
     {
         prefs = pref;
     }
 
-    public TabPane buildTabs(ScrollPane canvas)
+    public TabPane buildTabs()
     {
-        Tab defTab = new Tab("Unsaved File", canvas);
-        TabPane tBar = new TabPane();
-        tBar.getTabs().add(defTab);
-        return tBar;
+        ScrollPane defPane = new taB(prefs).build();
+        Tab defTab = new Tab("Unsaved File", defPane);
+        TabPane tPane = new TabPane();
+        tPane.getTabs().add(defTab);
+        return tPane;
     }
-    public void addTab()
+    public void addTab(TabPane tabCont)
     {
-        Tab tempTab = new Tab("Unsaved File", new ScrollWindow().buildScroll());
-        prefs.getdrawPanes().getTabs().add(tempTab);
+        Tab tempTab = new Tab("Unsaved File", new taB(prefs).build());
+        tabCont.getTabs().add(tempTab);
     }
 }

@@ -1,24 +1,26 @@
 package Paint.setup;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.util.Optional;
 
-public class view<privtae>
+public class view
 {
-    private allPrefs prefs;
+    private final allPrefs prefs;
     private Stage window;
+    private TabPane tabCont;
 
     public view(Stage windo)
     {
-        prefs = new allPrefs(windo);
         window = windo;
+        prefs = new allPrefs(windo);
         window.setTitle("GS Paint");
-        Scene dscene = prefs.build();
+        Scene dscene = build();
         window.setScene(dscene); //Activates the default scene
         window.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         window.show(); //Constructs the stage
@@ -40,6 +42,18 @@ public class view<privtae>
             if(res.get().equals(ButtonType.CANCEL))
                 event.consume();
         }
+    }
+
+    public Scene build()
+    {
+        HBox top = new HBox(new MenuPart(prefs).build());
+        tabCont = new TabBar(prefs).buildTabs();
+        prefs.setTabCont(tabCont);
+        VBox drawPrefs = new VBox(new prefMenu(prefs).build());
+        HBox bot = new HBox(5, tabCont, drawPrefs);
+        VBox inScene = new VBox(top, bot);
+        Scene scene = new Scene(inScene);
+        return scene;
     }
 
 }

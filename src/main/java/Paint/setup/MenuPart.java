@@ -9,9 +9,6 @@ import javafx.scene.input.KeyCombination;
 
 public class MenuPart{
 
-    private aboutPage aboutp;
-    private helpPage helpp;
-    private prefWin pref;
     private allPrefs prefs;
 
     public MenuPart(allPrefs pref)
@@ -19,20 +16,19 @@ public class MenuPart{
         prefs = pref;
     }
 
-
-    public MenuBar giveMenu()
-    {   pics picFctns = new pics(prefs);
+    public MenuBar build()
+    {
         Menu menuFile = new Menu("File"); //Instantiating the new menus
         Menu menuEdit = new Menu("Edit");
         Menu menuHelp = new Menu("Help");
-        Menu menuDraw = new Menu("Draw");
+//        Menu menuDraw = new Menu("Draw");
         MenuItem newTab = new MenuItem("New Tab");
         MenuItem save = new MenuItem("Save");
         MenuItem saveas = new MenuItem("Save As");
         MenuItem help = new MenuItem("Help");
         MenuItem about = new MenuItem("About");
-        MenuItem drawline = new MenuItem("Line");
-        MenuItem drawPrefs = new MenuItem("Drawing Preferences");
+//        MenuItem drawline = new MenuItem("Line");
+//        MenuItem drawPrefs = new MenuItem("Drawing Preferences");
         MenuItem zoomp = new MenuItem("Zoom+");
         MenuItem zoomm = new MenuItem("Zoom-");
         MenuItem insert = new MenuItem("Insert");
@@ -41,34 +37,34 @@ public class MenuPart{
         about.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
         help.setAccelerator(new KeyCodeCombination(KeyCode.H, KeyCombination.CONTROL_DOWN));
         newTab.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
-        zoomp.setOnAction(event -> zoomin());
-        zoomm.setOnAction(event -> zoomout());
+//        zoomp.setOnAction(event -> zoomin());
+//        zoomm.setOnAction(event -> zoomout());
         help.setOnAction(event -> new helpPage(prefs).displayHelp());
         about.setOnAction(event -> new aboutPage(prefs).displayAbout());
-        drawPrefs.setOnAction(event -> new prefWin(prefs).displayPrefWin());
-        saveas.setOnAction(event -> picFctns.saveAs());
-        save.setOnAction(event -> picFctns.save());
-        insert.setOnAction(actionEvent -> picFctns.findimg());
+//        drawPrefs.setOnAction(event -> new prefWin(prefs).displayPrefWin());
+        saveas.setOnAction(event -> new pics(prefs).saveAs());
+        save.setOnAction(event -> new pics(prefs).save());
+        insert.setOnAction(actionEvent -> new pics(prefs).findimg());
 //        newTab.setOnAction(event-> tabBar.addTab());
         menuHelp.getItems().addAll(help, about);
         menuFile.getItems().addAll(newTab, insert, save, saveas,zoomp, zoomm);
-        menuDraw.getItems().addAll(drawline, drawPrefs);
+//        menuDraw.getItems().addAll(drawline, drawPrefs);
         //Adds open, insert, save, saveas to file dropdown
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
-        topbar.getMenus().addAll(menuFile, menuEdit, menuHelp, menuDraw);
+        topbar.getMenus().addAll(menuFile, menuEdit, menuHelp);
         //Adds file, edit, about, help menus to a menu bar
         return topbar;
     }
 
-    public void zoomin()
-    {
-        prefs.setScaleY(2);
-        prefs.setScaleX(2);
-    }
-
-    public void zoomout()
-    {
-        prefs.setScaleX(.5);
-        prefs.setScaleY(.5);
-    }
+//    public void zoomin()
+//    {
+//        prefs.setScaleY(2);
+//        prefs.setScaleX(2);
+//    }
+//
+//    public void zoomout()
+//    {
+//        prefs.setScaleX(.5);
+//        prefs.setScaleY(.5);
+//    }
 }

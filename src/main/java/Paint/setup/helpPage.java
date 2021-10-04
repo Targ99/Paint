@@ -10,7 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 //Good for now//
 
-public class helpPage extends allPrefs{
+public class helpPage{
 
     private allPrefs prefs;
 
@@ -23,7 +23,7 @@ public class helpPage extends allPrefs{
     {
         Stage dialog = new Stage();
         dialog.initModality(Modality.NONE);
-        dialog.initOwner(mainStage);
+        dialog.initOwner(prefs.getWindow());
         dialog.setTitle("Help");
         Text title = new Text("Help Page");
         Text message = new Text("IDK what to put here yet...");
