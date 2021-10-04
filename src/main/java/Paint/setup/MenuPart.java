@@ -45,7 +45,7 @@ public class MenuPart{
         saveas.setOnAction(event -> new pics(prefs).saveAs());
         save.setOnAction(event -> new pics(prefs).save());
         insert.setOnAction(actionEvent -> new pics(prefs).findimg());
-//        newTab.setOnAction(event-> tabBar.addTab());
+        newTab.setOnAction(event-> new TabBar(prefs).addTab(prefs.getTabCont()));
         menuHelp.getItems().addAll(help, about);
         menuFile.getItems().addAll(newTab, insert, save, saveas,zoomp, zoomm);
 //        menuDraw.getItems().addAll(drawline, drawPrefs);

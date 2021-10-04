@@ -23,7 +23,7 @@ public class drawPixel
 
     public void pressed(MouseEvent event)
     {
-        System.out.print("wasragged");
+//        System.out.print("wasragged");
         if (nums.isDragging()) {
             return;
         }
@@ -61,13 +61,13 @@ public class drawPixel
             y = prefs.getCurrCanv().getHeight();
         nums.setPrevX(x);
         nums.setPrevY(y);
-        System.out.print("wasdagged");
+//        System.out.print("wasdagged");
 
     }
 
     public void released(MouseEvent event)
     {
-        System.out.print("wasdrgged");
+//        System.out.print("wasdrgged");
         gc.setFill(prefs.getDrawColor());
         gc.setStroke(prefs.getStrokeColor());
         gc.setLineWidth(prefs.getDrawWidth());

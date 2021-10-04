@@ -25,6 +25,9 @@ public class drawChoice {
     private Button rb10;
     private Button rb11;
     private Button rb12;
+    private Button rb13;
+    private Button rb14;
+    private Button rb15;
     private Button past;
 
     public drawChoice(allPrefs pref) {prefs = pref;}
@@ -44,6 +47,9 @@ public class drawChoice {
         rb10 = make((getClass().getResourceAsStream("/Icons/icons8-rectangle-48.png")), 9);
         rb11 = make((getClass().getResourceAsStream("/Icons/icons8-circle-50.png")), 10);
         rb12 = make((getClass().getResourceAsStream("/Icons/icons8-ellipse-50.png")), 11);
+        rb13 = make((getClass().getResourceAsStream("/Icons/icons8-circle-50.png")), 12);
+        rb14 = make((getClass().getResourceAsStream("/Icons/icons8-ellipse-50.png")), 13);
+        rb15 = make((getClass().getResourceAsStream("/Icons/icons8-ellipse-50.png")), 14);
         disp.add(rb1, 0, 1, 1, 1);
         disp.add(rb2, 1, 1, 1, 1);
         disp.add(rb3, 0, 0, 1, 1);
@@ -56,6 +62,9 @@ public class drawChoice {
         disp.add(rb10, 1, 3, 1, 1);
         disp.add(rb11, 1, 4, 1, 1);
         disp.add(rb12, 1, 5, 1, 1);
+        disp.add(rb13, 0, 6, 1, 1);
+        disp.add(rb14, 1, 6, 1, 1);
+        disp.add(rb15, 0, 7, 1, 1);
 
         past = rb1;
         return disp;

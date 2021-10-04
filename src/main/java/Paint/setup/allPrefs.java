@@ -17,18 +17,13 @@ import java.io.File;
 public class allPrefs{
     private Stage window;
     private TabPane tabCont;
-    private Tab currTab;
+    private taB currTab;
     private Canvas currCanv;
-//    private TabPane tabPanes;
-//    private ScrollWindow scrollWindow;
     private int drawType = 0;
-
-//    private Canvas drawBrd = new Canvas(canvW, canvH);
     private Color drawColor = Color.BLACK;
     private Color strokeColor = Color.BLACK;
     private double drawWidth = 10;
     private File currentFile = null;
-//    private GraphicsContext gc = drawBrd.getGraphicsContext2D();
 
     public allPrefs(Stage windo)
     {
@@ -40,9 +35,6 @@ public class allPrefs{
 
 // Getters and Setters //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
-//    public Stage getMainStage() {return mainStage;}
-//    public void setMainStage(Stage mainStag) {this.mainStage = mainStag;}
-
     public Canvas getCurrCanv() {return currCanv;}
     public TabPane getTabCont() {return tabCont;}
     public Stage getWindow() {return window;}
@@ -51,9 +43,9 @@ public class allPrefs{
     public double getDrawWidth() {return drawWidth;}
     public Color getStrokeColor() {return strokeColor;}
     public int getDrawType() {return drawType;}
+    public taB getCurrTab() {return currTab;}
 
-//    public void setCanvH(int canvH) {this.canvH = canvH;}
-//    public void setCanvW(int canvW) {this.canvW = canvW;}
+    public void setCurrTab(taB currTab) {this.currTab = currTab;}
     public void setCurrentFile(File currentFile) {this.currentFile = currentFile;}
     public void setDrawWidth(double drawWidth) {this.drawWidth = drawWidth;}
     public void setDrawColor(javafx.scene.paint.Color drawColor) {this.drawColor = drawColor;}
@@ -61,7 +53,8 @@ public class allPrefs{
     public void setStrokeColor(Color strokeColor) {this.strokeColor = strokeColor;}
     public void setTabCont(TabPane tabcont) {tabCont = tabcont;}
     public void setCurrCanv(Canvas currCanv) {this.currCanv = currCanv;}
-    // Getters and Setters //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+// Getters and Setters //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 }

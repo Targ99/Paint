@@ -53,9 +53,15 @@ public class prefMenu {
 
     public String colorString(Color color)
     {
-        String red = "R:" + color.getRed();
-        String green = "G:" + color.getGreen();
-        String blue = "B:" + color.getBlue();
+        double r = color.getRed()*255;
+        double g = color.getGreen()*255;
+        double b = color.getBlue()*255;
+        r = r-(r%1);
+        g = g-(g%1);
+        b = b-(b%1);
+        String red = "R:" + r;
+        String green = "G:" +g;
+        String blue = "B:" + b;
         return red + "\n" + green + "\n" + blue;
     }
 

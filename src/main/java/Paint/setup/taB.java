@@ -3,12 +3,13 @@ package Paint.setup;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.File;
 
-public class taB{
+public class taB extends Tab{
 
 //    protected GraphicsContext gc = drawBrd.getGraphicsContext2D();
     private allPrefs prefs;
@@ -19,7 +20,10 @@ public class taB{
 
 
 
-    public taB(allPrefs pref){prefs = pref;}
+    public taB(allPrefs pref)
+    {
+        prefs = pref;
+    }
 
     public ScrollPane build()
     {
@@ -41,5 +45,16 @@ public class taB{
         this.canvW = width;
     }
 
+    public File getSaveSpace() {
+        return saveSpace;
+    }
+
+    public void setSaveSpace(File saveSpace) {
+        this.saveSpace = saveSpace;
+    }
+
+    public Canvas getDrawBrd() {
+        return drawBrd;
+    }
 
 }

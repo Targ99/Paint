@@ -1,5 +1,7 @@
 package Paint.setup;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -48,6 +50,7 @@ public class view
     {
         HBox top = new HBox(new MenuPart(prefs).build());
         tabCont = new TabBar(prefs).buildTabs();
+
         prefs.setTabCont(tabCont);
         VBox drawPrefs = new VBox(new prefMenu(prefs).build());
         HBox bot = new HBox(5, tabCont, drawPrefs);

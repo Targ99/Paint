@@ -52,7 +52,8 @@ public class pics{
         FileChooser savefile = new FileChooser(); //Creates instance of file explorer
         savefile.setTitle("Save As");
         prefs.setCurrentFile(savefile.showSaveDialog(prefs.getWindow())); //Changes default save location
-
+        prefs.getCurrTab().setSaveSpace(prefs.getCurrentFile());
+        prefs.getCurrTab().setText(prefs.getCurrentFile().toString());
         try {
             WritableImage snapshot = prefs.getCurrCanv().snapshot(new SnapshotParameters(), null);
             BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
