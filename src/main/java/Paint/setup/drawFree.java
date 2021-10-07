@@ -3,6 +3,7 @@ package Paint.setup;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 //import java.;
 
@@ -39,8 +40,17 @@ public class drawFree{
             nums.setPrevX(x);
             nums.setPrevY(y);
             nums.setDragging(true);
-            gc.setLineWidth(prefs.getDrawWidth());
-            gc.setStroke(prefs.getDrawColor());
+            switch (prefs.getDrawType())
+            {
+                case 1:
+                    gc.setLineWidth(prefs.getDrawWidth());
+                    gc.setStroke(prefs.getDrawColor());
+                    break;
+                default:
+                    gc.setLineWidth(prefs.getDrawWidth());
+                    gc.setStroke(Color.LIGHTGRAY);
+            }
+
         }
     }
 

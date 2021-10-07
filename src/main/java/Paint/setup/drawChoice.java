@@ -28,6 +28,7 @@ public class drawChoice {
     private Button rb13;
     private Button rb14;
     private Button rb15;
+    private Button rb16;
     private Button past;
 
     public drawChoice(allPrefs pref) {prefs = pref;}
@@ -50,6 +51,7 @@ public class drawChoice {
         rb13 = make((getClass().getResourceAsStream("/Icons/icons8-circle-50.png")), 12);
         rb14 = make((getClass().getResourceAsStream("/Icons/icons8-ellipse-50.png")), 13);
         rb15 = make((getClass().getResourceAsStream("/Icons/icons8-ellipse-50.png")), 14);
+        rb16 = make((getClass().getResourceAsStream("/Icons/icons8-ellipse-50.png")), 15);
         disp.add(rb1, 0, 1, 1, 1);
         disp.add(rb2, 1, 1, 1, 1);
         disp.add(rb3, 0, 0, 1, 1);
@@ -65,6 +67,7 @@ public class drawChoice {
         disp.add(rb13, 0, 6, 1, 1); // reg
         disp.add(rb14, 1, 6, 1, 1); // mine
         disp.add(rb15, 0, 7, 1, 1); // erase
+        disp.add(rb16, 1, 7, 1, 1); // move
 
         past = rb1;
         return disp;
@@ -72,7 +75,7 @@ public class drawChoice {
 
     private Button make(InputStream imageStream, int iter)
     {
-        if (imageStream == null) {
+        if(imageStream == null) {
             Button temp = new Button("Button");
             temp.setOnAction(event -> actionB(temp, iter));
             return temp;

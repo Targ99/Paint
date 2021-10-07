@@ -8,6 +8,7 @@ public class ChooseDraw
     private allPrefs prefs;
     private drawNums nums = new drawNums();
 
+
     public ChooseDraw(allPrefs pref) {prefs = pref;}
 
 

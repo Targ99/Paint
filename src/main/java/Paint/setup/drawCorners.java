@@ -98,6 +98,18 @@ public class drawCorners{
                 uniRect makeR = new uniRect(prefs);
                 makeR.buildRect( nums.getPrevX(), nums.getPrevY(),nums.getFinX(), nums.getFinY());
                 break;
+            case 15:
+                if(nums.isPlaced()) {
+                    placeImg place = new placeImg(prefs, nums);
+                    place.getImg(nums.getPrevX(), nums.getPrevY(), nums.getFinX(), nums.getFinY());
+                    System.out.println(nums.getPrevX() + "      " + nums.getPrevY() + nums.getFinX() + "      " + nums.getFinY());
+                }
+                else
+                {
+                    placeImg place = new placeImg(prefs, nums);
+                    place.putImg();
+                }
+                break;
             default:
                 if(!nums.isWasD())
                 {

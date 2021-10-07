@@ -13,7 +13,7 @@ public class taB extends Tab{
 
 //    protected GraphicsContext gc = drawBrd.getGraphicsContext2D();
     private allPrefs prefs;
-    private double canvH = 500;
+    private double canvH = 700;
     private double canvW = 700;
     private Canvas drawBrd;
     private File saveSpace = null;
