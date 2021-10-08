@@ -18,6 +18,10 @@ public class drawPane {
         draw = new ChooseDraw(prefs);
     }
 
+    /**
+     * builds a pane which all shapes are drawn on
+     * @return pane
+     */
     public Pane buildPane()
     {
         Pane drawPane = new Pane();
@@ -29,6 +33,12 @@ public class drawPane {
         return drawPane;
     }
 
+    /**
+     * adds another object to the array for undoing
+     * populates the list for 40 total undos
+     * balances list when iteration has happened
+     * @param obj
+     */
     public void addStep(Node obj)
     {
         if(currIter == 0) {
@@ -45,6 +55,9 @@ public class drawPane {
         System.out.println("step called");
     }
 
+    /**
+     * makes items transparent when undone
+     */
     public void undo()
     {
         if(currIter<39 && !(imgArray[currIter] == null)) {
@@ -69,6 +82,9 @@ public class drawPane {
         }
     }
 
+    /**
+     * redoes anything undone before new changes
+     */
     public void redo()
     {
         while(imgArray[currIter]== null && currIter>0)

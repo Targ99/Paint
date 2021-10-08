@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 
+
 public class taB extends Tab
 {
     private allPrefs prefs;
@@ -18,13 +19,21 @@ public class taB extends Tab
     private File saveSpace = null;
     private drawPane drawpane;
 
-
+    /**
+     * extends Tab because some attributes required lower level
+     * containers
+     * @param pref
+     */
     public taB(allPrefs pref)
     {
         prefs = pref;
         drawpane = new drawPane(prefs);
     }
 
+    /**
+     * builds and returns a populated scrollpane
+     * @return
+     */
     public ScrollPane build()
     {
         dPane = drawpane.buildPane();

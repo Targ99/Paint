@@ -6,7 +6,6 @@ import Paint.setup.windows.helpPage;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -20,6 +19,10 @@ public class MenuPart{
         prefs = pref;
     }
 
+    /**
+     * builds the file, edit, and help menues and returns a populated menubar
+     * @return
+     */
     public MenuBar build()
     {
         Menu menuFile = new Menu("File"); //Instantiating the new menus
@@ -43,7 +46,6 @@ public class MenuPart{
         newTab.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
         undo.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
         redo.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
-
         help.setOnAction(event -> new helpPage(prefs).displayHelp());
         about.setOnAction(event -> new aboutPage(prefs).displayAbout());
         undo.setOnAction(event -> prefs.getDrawPane().undo());
@@ -56,11 +58,8 @@ public class MenuPart{
         menuHelp.getItems().addAll(help, about);
         menuFile.getItems().addAll(newTab, insert, save, saveas,zoomp, zoomm);
         menuEdit.getItems().addAll(undo, redo, canvs);
-//        menuDraw.getItems().addAll(drawline, drawPrefs);
-        //Adds open, insert, save, saveas to file dropdown
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
         topbar.getMenus().addAll(menuFile, menuEdit, menuHelp);
-        //Adds file, edit, about, help menus to a menu bar
         return topbar;
     }
 

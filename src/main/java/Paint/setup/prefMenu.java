@@ -21,6 +21,10 @@ public class prefMenu {
         prefs = pref;
     }
 
+    /**
+     * returns a populated vbox of drawing preferences
+     * @return
+     */
     public VBox build()
     {
         Text title = new Text("Drawing Preferences");
@@ -53,6 +57,12 @@ public class prefMenu {
         prefs.setStrokeColor(strokepick.getValue());
     }
 
+
+    /**
+     * converts a color into a string
+     * @param color
+     * @return string with r, g, and b values
+     */
     public String colorString(Color color)
     {
         double r = color.getRed()*255;
@@ -66,6 +76,13 @@ public class prefMenu {
         String blue = "B:" + b;
         return red + "\n" + green + "\n" + blue;
     }
+
+    /**
+     * builds a slider
+     * @param value the existing value of the attribute
+     * @param choice value to decide which parameter it alters
+     * @return a built slider
+     */
 
     public Slider buildSlider(double value, int choice)
     {
@@ -81,6 +98,12 @@ public class prefMenu {
         slide.valueProperty().addListener((observableValue, number, t1) -> wideAct((double) t1, choice));
         return slide;
     }
+
+    /**
+     * changes preferences for draw width and polygon sides
+     * @param newW value changed on the slider
+     * @param choice which preference will be modified
+     */
 
     private void wideAct(double newW, int choice)
     {

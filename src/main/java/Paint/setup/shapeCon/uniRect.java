@@ -1,4 +1,6 @@
-package Paint.setup;
+package Paint.setup.shapeCon;
+
+import Paint.setup.allPrefs;
 
 public class uniRect {
 
@@ -9,6 +11,15 @@ public class uniRect {
         prefs = pref;
     }
 
+    /**
+     * calculates a normal polygon's points for a given
+     * number of sides
+     * @param x1 starting x val
+     * @param y1 starting y val
+     * @param x2 final x val
+     * @param y2 final y val
+     * @return an array of coordinates for the points of the regular polygon
+     */
     public double[] buildRect(double x1, double y1, double x2, double y2)
     {
         double pi = 3.14159265359;
@@ -31,6 +42,14 @@ public class uniRect {
         return coords;
     }
 
+    /**
+     * calculates the points for a unique shape
+     * @param x1 starting x val
+     * @param y1 starting y val
+     * @param x2 final x val
+     * @param y2 final y val
+     * @return array of x and y values
+     */
     public double[] buildStar(double x1, double y1, double x2, double y2)
     {
         double[] coords = new double[10];

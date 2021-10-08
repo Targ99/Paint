@@ -29,6 +29,11 @@ public class view
         window.show(); //Constructs the stage
     }
 
+    /**
+     * warning message to save on close
+     * @param event
+     */
+
     private void closeWindowEvent(WindowEvent event)
     {
         System.out.println("Window close request ...");
@@ -47,6 +52,11 @@ public class view
         }
     }
 
+    /**
+     * returns a scene with a toolbar,
+     * preference bar, and tab view
+     * @return
+     */
     public Scene build()
     {
         HBox top = new HBox(new MenuPart(prefs).build());
@@ -62,6 +72,11 @@ public class view
         return scene;
 
     }
+
+    /**
+     * sets the scale of the current tab for zoom
+     * @param diff zoom input from a slider
+     */
 
     public void zoom(double diff)
     {

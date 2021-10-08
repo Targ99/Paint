@@ -12,7 +12,6 @@ public class allPrefs
     private Stage window;
     private TabPane tabCont;
     private taB currTab;
-//    private Canvas currCanv;
     private Pane currPane;
     private drawPane drawpane;
     private double canvW, canvH;
@@ -24,6 +23,10 @@ public class allPrefs
     private double drawWidth = 10;
     private File currentFile = null;
 
+    /**
+     * class containing all of the preferences for uniformity across tabs
+     * @param windo default stage
+     */
     public allPrefs(Stage windo)
     {
         window = windo;
@@ -31,8 +34,6 @@ public class allPrefs
 
 // Getters and Setters //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
-
-//    public Canvas getCurrCanv() {return currCanv;}
 
     public double getCanvH() {
         return canvH;
@@ -79,7 +80,6 @@ public class allPrefs
     public void setDrawType(int drawType) {this.drawType = drawType;}
     public void setStrokeColor(Color strokeColor) {this.strokeColor = strokeColor;}
     public void setTabCont(TabPane tabcont) {tabCont = tabcont;}
-//    public void setCurrCanv(Canvas currCanv) {this.currCanv = currCanv;}
     public void setNumsides(int numsides) {this.numsides = numsides;}
     public void setFilled(boolean filled) {this.filled = filled;}
 

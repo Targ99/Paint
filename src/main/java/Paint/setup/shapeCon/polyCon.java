@@ -2,7 +2,6 @@ package Paint.setup.shapeCon;
 
 import Paint.setup.allPrefs;
 import Paint.setup.drawNums;
-import Paint.setup.uniRect;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;

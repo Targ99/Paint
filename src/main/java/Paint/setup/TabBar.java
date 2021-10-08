@@ -11,6 +11,10 @@ public class TabBar{
         prefs = pref;
     }
 
+    /**
+     * returns a populated tab pane with a default tab
+     * @return
+     */
     public TabPane buildTabs()
     {
         taB defTab = newTab();
@@ -19,12 +23,22 @@ public class TabBar{
         System.out.println("drag tab");
         return tPane;
     }
+
+    /**
+     * adds a tab to the tab bar
+     * new tab is set as the current tab
+     * @param tabCont
+     */
     public void addTab(TabPane tabCont)
     {
         taB tempTab = newTab();
         tabCont.getTabs().add(tempTab);
     }
 
+    /**
+     * returns a new tab
+     * @return
+     */
     private taB newTab()
     {
         taB temp = new taB(prefs);
@@ -35,6 +49,11 @@ public class TabBar{
         return temp;
     }
 
+    /**
+     * function used when tab is switched
+     * alters the appropriate attributes in the preference container
+     * @param currTab
+     */
     public void tabChange(taB currTab)
     {
         prefs.setCurrTab(currTab);
@@ -45,6 +64,11 @@ public class TabBar{
         prefs.setCanvW(currTab.getCanvW());
     }
 
+    /**
+     * checks if the given tab is the selected tab
+     * if so, calls the function to switch necessary parameters
+     * @param currtab
+     */
     private void isTab(taB currtab)
     {
         if(currtab.isSelected())

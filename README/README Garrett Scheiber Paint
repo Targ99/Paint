@@ -8,6 +8,64 @@ Links:
     GitHub: https://github.com/Targ99/Paint
     Email: garrett.scheiber@valpo.edu
 ------------------------------------------------------------------------
+Version 0.004      Date: 09/17/2021
+    -New Features:
+        GUI:
+            Help and About windows added to the primary menu
+            Error window for unsupported file types
+            Image "save" and "save as" through file explorer
+            Save calls save as if no previous save location exists
+            Current save location storage
+            Color chooser in primary menu
+            Can draw a line, but no other options
+            Can change line width
+        Code:
+            Improved file/class organization
+            Paint main and launcher files
+            Main view constructor
+            Alternate windows for errors/about/help
+    -Fixed Issues:
+            Error message window format
+            Window title
+    -Known Issues:
+            Color chooser has no effect on objects yet
+            Help window appears, but needs populated
+            Scroll allows top menu hidden
+            Scroll acts weird sometimes
+    -Expected Next Sprint:
+            Canvas modification
+            Clear board function
+            Color chooser effectiveness
+------------------------------------------------------------------------
+Version 0.003      Date: 09/17/2021
+    -New Features:
+        GUI:
+            Help and About windows added to the primary menu
+            Error window for unsupported file types
+            Image "save" and "save as" through file explorer
+            Save calls save as if no previous save location exists
+            Current save location storage
+            Color chooser in primary menu
+            Can draw a line, but no other options
+            Can change line width
+        Code:
+            Improved file/class organization
+            Paint main and launcher files
+            Main view constructor
+            Alternate windows for errors/about/help
+    -Fixed Issues:
+            Error message window format
+            Window title
+    -Known Issues:
+            Color chooser has no effect on objects yet
+            Help window appears, but needs populated
+            Scroll allows top menu hidden
+            Scroll acts weird sometimes
+    -Expected Next Sprint:
+            Canvas modification
+            Clear board function
+            Color chooser effectiveness
+------------------------------------------------------------------------
 Version 0.002      Date: 09/17/2021
     -New Features:
         GUI:

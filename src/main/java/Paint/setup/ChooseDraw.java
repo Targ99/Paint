@@ -10,7 +10,11 @@ public class ChooseDraw
 
     public ChooseDraw(allPrefs pref) {prefs = pref;}
 
-
+    /**
+     * uses mouse event attributes and drawing parameters to
+     * construct the desired shape
+     * @param event
+     */
     void pressed(MouseEvent event)
     {
         System.out.println("drag press");

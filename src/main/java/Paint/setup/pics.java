@@ -26,6 +26,10 @@ public class pics{
         prefs = pref;
     }
 
+    /**
+     * saves in the tab's current save location
+     * calls saveas if no location exists
+     */
     public void save()//Default save with existing save location
     {
         if(prefs.getCurrentFile() == null)
@@ -47,6 +51,10 @@ public class pics{
         }
     }
 
+    /**
+     * called when no current save location exists, or when a new save location is desired
+     */
+
     public void saveAs()//Save with or without default location
     {
         FileChooser savefile = new FileChooser(); //Creates instance of file explorer
@@ -63,6 +71,12 @@ public class pics{
             System.out.println("Exception occured :" + e.getMessage());
         }
     }
+
+    /**
+     * adds the given image to the current pane
+     * @param file
+     * @param stage
+     */
 
     public void addImage(File file, Stage stage)
     {
@@ -82,6 +96,10 @@ public class pics{
             errorMSG.errorwindow(prefs);
         }
     }
+
+    /**
+     * function to find and initiate image insertion
+     */
     public void findimg() //Opens a file explorer to find an image
     {
         FileChooser openfile = new FileChooser(); //Creates instance of file explorer
@@ -94,6 +112,12 @@ public class pics{
         }
     }
 
+    /**
+     * function checks whether the given file contains an image
+     * @param filename
+     * @param stage
+     * @return true if allowable image format, false otherwise
+     */
     public boolean isIMG(File filename, Stage stage) //Check if file is image
     {
         try {

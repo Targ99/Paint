@@ -28,7 +28,7 @@ public class drawChoice {
 
     public drawChoice(allPrefs pref) {prefs = pref;}
 
-    public GridPane build() {
+    public GridPane build() { // Building all the shape buttons
         disp = new GridPane();
          rb1 = make("file:C:\\Users\\garre\\Desktop\\CS250\\Paint\\src\\main\\resources\\icons8-line-50.png", 0, false);
          rb2 = make("file:C:\\Users\\garre\\Desktop\\CS250\\Paint\\src\\main\\resources\\icons8-squiggly-line-50.png", 1, false);
@@ -67,7 +67,15 @@ public class drawChoice {
         return disp;
     }
 
-    private Button make(String imageStream, int iter, boolean fill)
+    /**
+     * styles each button with the desired icon and calls the functionality setup
+     * @param imageStream image url to be added
+     * @param iter draw type
+     * @param fill filled/unfilled shape
+     * @return returns the instantiated button with all params and functions set up
+     */
+
+    private Button make(String imageStream, int iter, boolean fill) //functions and icon addition
     {
         Image img = new Image(imageStream);
         if(img == null) {
@@ -84,7 +92,14 @@ public class drawChoice {
         }
     }
 
-    private void actionB(Button temp, int iter, boolean fill)
+    /**
+     * sets each attribute changed in the preferences when pressed
+     * @param temp temp button for uniformity
+     * @param iter drawtype variable
+     * @param fill filled/unfilled shape
+     */
+
+    private void actionB(Button temp, int iter, boolean fill) // chosen button highlight
     {
         past.setDisable(false);
         temp.setDisable(true);

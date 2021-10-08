@@ -138,15 +138,3 @@ public class drawCorners{
 
 }
 
-/*
-if(nums.isPlaced()) {
-                    placeImg place = new placeImg(prefs, nums);
-                    place.getImg(nums.getPrevX(), nums.getPrevY(), nums.getFinX(), nums.getFinY());
-                    System.out.println(nums.getPrevX() + "      " + nums.getPrevY() + nums.getFinX() + "      " + nums.getFinY());
-                }
-                else
-                {
-                    placeImg place = new placeImg(prefs, nums);
-                    place.putImg();
-                }
- */
