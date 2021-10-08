@@ -1,5 +1,7 @@
-package Paint.setup;
+package Paint.setup.shapeCon;
 
+import Paint.setup.allPrefs;
+import Paint.setup.drawNums;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,7 +26,6 @@ public class textWin
     {
         nums = n1;
         prefs = pref;
-        gc = prefs.getCurrCanv().getGraphicsContext2D();
     }
 
     public void displayWin()
@@ -37,25 +38,28 @@ public class textWin
         text = new TextField("Text:");
         VBox box = new VBox(5);
         Button exitButton = new Button("OK");
-        exitButton.setOnAction(event -> putText());
+        x = nums.getPrevX();
+        y = nums.getPrevY();
+        exitButton.setOnAction(event -> putText(x, y));
         exitButton.setAlignment(Pos.CENTER);
         exitButton.setPrefWidth(100);
         box.getChildren().addAll(text, space, exitButton);
-        x = nums.getPrevX();
-        y = nums.getPrevY();
         Scene defaultsc = new Scene(box);
         dialog.setScene(defaultsc);
         dialog.show();
     }
 
-    private void putText()
+    private void putText(double x, double y)
     {
         String input = text.getText();
+        Text t = new Text(input);
+        t.setX(x);
+        t.setY(y);
+        t.setFill(prefs.getStrokeColor());
+        t.setStrokeWidth(prefs.getDrawWidth());
+        prefs.getCurrPane().getChildren().add(t);
+        prefs.getDrawPane().addStep(t);
         System.out.println(input + nums.getPrevX() + nums.getPrevY());
-        gc.setLineWidth(prefs.getDrawWidth());
-        gc.setStroke(prefs.getDrawColor());
-        gc.setFill(prefs.getDrawColor());
-        gc.fillText(input, x,y);
         dialog.close();
     }
 

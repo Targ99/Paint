@@ -1,9 +1,9 @@
 package Paint.setup;
 
+import Paint.setup.windows.error;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -19,7 +19,7 @@ import java.nio.file.Files;
 public class pics{
 
     private allPrefs prefs;
-    private drawBoard board;
+//    private drawBoard board;
 
     public pics(allPrefs pref)
     {
@@ -35,7 +35,7 @@ public class pics{
         else
         {
             try {
-                WritableImage snapshot = prefs.getCurrCanv().snapshot(new SnapshotParameters(), null);
+                WritableImage snapshot = prefs.getCurrPane().snapshot(new SnapshotParameters(), null);
                 BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
                 assert bImage != null;
                 ImageIO.write(bImage, "png", prefs.getCurrentFile());
@@ -55,7 +55,7 @@ public class pics{
         prefs.getCurrTab().setSaveSpace(prefs.getCurrentFile());
         prefs.getCurrTab().setText(prefs.getCurrentFile().toString());
         try {
-            WritableImage snapshot = prefs.getCurrCanv().snapshot(new SnapshotParameters(), null);
+            WritableImage snapshot = prefs.getCurrPane().snapshot(new SnapshotParameters(), null);
             BufferedImage bImage = SwingFXUtils.fromFXImage(snapshot, null);
             assert bImage != null;
             ImageIO.write(bImage, "png", prefs.getCurrentFile());
@@ -70,12 +70,15 @@ public class pics{
         {
             InputStream stream = new FileInputStream(file);
             javafx.scene.image.Image imag = new Image(stream); //instantiating image from file name
-            GraphicsContext gc = prefs.getCurrCanv().getGraphicsContext2D();
-            gc.drawImage(imag, 0, 0, 100, 100);
+            ImageView imageV = new ImageView(imag);
+            imageV.setPreserveRatio(true);
+            imageV.setFitWidth(prefs.getCanvW());
+            prefs.getCurrPane().getChildren().add(imageV);
+            prefs.getDrawPane().addStep(imageV);
         }
         catch(IOException e)
         {
-            error errorMSG = new error("Image Must be of PNG, GIF, or JPEG Format", prefs.getWindow());
+            error errorMSG = new error("Image Must be of PNG, GIF, or JPEG Format");
             errorMSG.errorwindow(prefs);
         }
     }
@@ -98,14 +101,14 @@ public class pics{
             if (extension.equals("image/jpeg") || extension.equals("image/png") || extension.equals("image/gif")) {return true;}
 
             else {   //Case if unaccepted format
-                error errorMSG = new error("Image Must be of PNG, GIF, or JPEG Format", prefs.getWindow());
+                error errorMSG = new error("Image Must be of PNG, GIF, or JPEG Format");
                 errorMSG.errorwindow(prefs);
                 return false;
             }
         }
         catch (IOException e) //Case if format checking fails
         {
-            error errorMSG = new error("File Extension not Recognized", prefs.getWindow());
+            error errorMSG = new error("File Extension not Recognized");
             errorMSG.errorwindow(prefs);
             return false;
         }

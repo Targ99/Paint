@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="launchPaint" type="Application" factoryName="Application" nameIsGenerated="true">
+  <configuration default="false" name="lPaint" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="Paint.launchPaint" />
     <module name="Paint" />
     <method v="2">

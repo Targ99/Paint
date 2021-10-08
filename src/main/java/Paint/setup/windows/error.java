@@ -1,5 +1,6 @@
-package Paint.setup;
+package Paint.setup.windows;
 
+import Paint.setup.allPrefs;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,7 +16,7 @@ public class error{
 
     private String errors;
 
-    public error(String errors, Stage stage)
+    public error(String errors)
     {
         this.errors = errors;
     }
@@ -27,16 +28,13 @@ public class error{
         dialog.initOwner(prefs.getWindow());
         dialog.setTitle("Error");
         VBox box = new VBox();
-        Text title = new Text("File Format Not Supported");
         Text errorLabel = new Text(errors);
-        Text space1 = new Text(" ");
         Text space2 = new Text(" ");
-        title.setTextAlignment(TextAlignment.CENTER);
         errorLabel.setTextAlignment(TextAlignment.CENTER);
         Button exitButton = new Button("OK");
         exitButton.setAlignment(Pos.CENTER);
         exitButton.setOnAction(event -> dialog.close());
-        box.getChildren().addAll(title,space1, errorLabel,space2, exitButton);
+        box.getChildren().addAll(errorLabel,space2, exitButton);
         box.setAlignment(Pos.CENTER);
         Scene dialogScene = new Scene(box);
         dialog.setScene(dialogScene);

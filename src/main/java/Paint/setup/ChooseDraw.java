@@ -1,6 +1,5 @@
 package Paint.setup;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 
 public class ChooseDraw
@@ -14,14 +13,18 @@ public class ChooseDraw
 
     void pressed(MouseEvent event)
     {
+        System.out.println("drag press");
+
         switch (prefs.getDrawType()) {
-            case 1, 14:
+            case 2, 15:
                 new drawFree(prefs, nums).pressed(event);
                 break;
-            case 2, 3:
+            case 4, 3:
                 new drawPixel(prefs, nums).pressed(event);
                 break;
             default:
+                System.out.println("drag corn");
+
                 new drawCorners(prefs, nums).pressed(event);
                 break;
         }
@@ -29,11 +32,10 @@ public class ChooseDraw
     void dragged(MouseEvent event)
     {
         switch (prefs.getDrawType()) {
-            case 1, 14:
+            case 2, 15:
                 new drawFree(prefs, nums).dragged(event);
                 break;
-            case 2, 3:
-                new drawPixel(prefs, nums).dragged(event);
+            case 4, 3:
                 break;
             default:
                 new drawCorners(prefs, nums).dragged(event);
@@ -43,19 +45,16 @@ public class ChooseDraw
     void released(MouseEvent event)
     {
         switch (prefs.getDrawType()) {
-            case 1, 14:
+            case 2, 15:
                 nums.setDragging(false);
+                nums.setPat(null);
+
                 break;
-            case 2, 3:
-                new drawPixel(prefs, nums).released(event);
+            case 4, 3:
                 break;
             default:
                 new drawCorners(prefs, nums).released(event);
                 break;
         }
-        nums.setPrevX(0);
-        nums.setPrevY(0);
-        nums.setFinX(0);
-        nums.setFinY(0);
     }
 }

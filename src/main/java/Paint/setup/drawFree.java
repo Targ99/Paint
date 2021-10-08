@@ -1,37 +1,35 @@
 package Paint.setup;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-
-//import java.;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 
 public class drawFree{
 
     private allPrefs prefs;
     private drawNums nums;
-    private GraphicsContext gc;
 
     public drawFree(allPrefs pref, drawNums n1)
     {
         nums = n1;
         prefs = pref;
-        gc = prefs.getCurrCanv().getGraphicsContext2D();
     }
 
 
-    public void pressed(MouseEvent e)
+    public void pressed(MouseEvent event)
     {
         if (nums.isDragging())  // Ignore mouse presses that occur
             return;            //    when user is already drawing a curve.
 
 
-        int x = (int)e.getX();   // x-coordinate where the user clicked.
-        int y = (int)e.getY();   // y-coordinate where the user clicked.
-
-        int width = (int)prefs.getCurrCanv().getWidth();    // Width of the canvas.
-        int height = (int)prefs.getCurrCanv().getHeight();  // Height of the canvas.
+        int x = (int)event.getX();   // x-coordinate where the user clicked.
+        int y = (int)event.getY();   // y-coordinate where the user clicked.
+        nums.setPrevX(x);
+        nums.setPrevY(y);
+        int width = (int)prefs.getCanvW();    // Width of the canvas.
+        int height = (int)prefs.getCanvH();  // Height of the canvas.
 
 
         if (x > 0 && x < width && y > 0 && y < height) {
@@ -40,17 +38,20 @@ public class drawFree{
             nums.setPrevX(x);
             nums.setPrevY(y);
             nums.setDragging(true);
+            Path tPath = new Path();
+            tPath.getElements().add(new MoveTo(x,y));
+            nums.setPat(tPath);
+            nums.getPat().setStrokeWidth(prefs.getDrawWidth());
             switch (prefs.getDrawType())
             {
-                case 1:
-                    gc.setLineWidth(prefs.getDrawWidth());
-                    gc.setStroke(prefs.getDrawColor());
+                case 2:
+                    nums.getPat().setStroke(prefs.getStrokeColor());
                     break;
                 default:
-                    gc.setLineWidth(prefs.getDrawWidth());
-                    gc.setStroke(Color.LIGHTGRAY);
+                    nums.getPat().setStroke(Color.WHITE);
             }
-
+            prefs.getCurrPane().getChildren().add(tPath);
+            prefs.getDrawPane().addStep(tPath);
         }
     }
 
@@ -64,15 +65,15 @@ public class drawFree{
         double y = evt.getY();   // y-coordinate of mouse.
         if (x < 0)                          // Adjust the value of x,
             x = 0;                           //   to make sure it's in
-        if (x > prefs.getCurrCanv().getWidth())       //   the drawing area.
-            x = (int)prefs.getCurrCanv().getWidth();
+        if (x > prefs.getCanvW())       //   the drawing area.
+            x = (int)prefs.getCanvW();
         if (y < 0)                          // Adjust the value of y,
             y = 0;                           //   to make sure it's in
-        if (y > prefs.getCurrCanv().getHeight())       //   the drawing area.
-            y = prefs.getCurrCanv().getHeight();
-        gc.strokeLine(nums.getPrevX(), nums.getPrevY(), x, y);  // Draw the line.
-        nums.setPrevX(x);  // Get ready for the next line segment in the curve.
-        nums.setPrevY(y);
+        if (y > prefs.getCanvH())       //   the drawing area.
+            y = prefs.getCanvH();
+        nums.getPat().getElements().add(new LineTo(x,y));
+//        nums.setPrevX(x);  // Get ready for the next line segment in the curve.
+//        nums.setPrevY(y);
     }
 
 }

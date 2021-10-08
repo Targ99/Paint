@@ -1,12 +1,6 @@
 package Paint.setup;
 
-import javafx.beans.value.ObservableValue;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-
-import java.io.File;
 
 public class TabBar{
 
@@ -22,6 +16,7 @@ public class TabBar{
         taB defTab = newTab();
         TabPane tPane = new TabPane();
         tPane.getTabs().add(defTab);
+        System.out.println("drag tab");
         return tPane;
     }
     public void addTab(TabPane tabCont)
@@ -36,14 +31,18 @@ public class TabBar{
         temp.setText("Unsaved");
         temp.setContent(temp.build());
         temp.setOnSelectionChanged (e -> isTab(temp));
+        System.out.println("drag");
         return temp;
     }
 
     public void tabChange(taB currTab)
     {
         prefs.setCurrTab(currTab);
-        prefs.setCurrCanv(currTab.getDrawBrd());
+        prefs.setCurrPane(currTab.getdPane());
         prefs.setCurrentFile(currTab.getSaveSpace());
+        prefs.setDrawPane(currTab.getDrawPane());
+        prefs.setCanvH(currTab.getCanvH());
+        prefs.setCanvW(currTab.getCanvW());
     }
 
     private void isTab(taB currtab)

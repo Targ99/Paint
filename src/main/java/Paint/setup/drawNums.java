@@ -1,9 +1,7 @@
 package Paint.setup;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
-import java.awt.image.BufferedImage;
+import javafx.scene.shape.*;
 
 public class drawNums
 {
@@ -13,6 +11,61 @@ public class drawNums
     private Image bimg;
     private double imgW, imgH;
     private boolean placed = true;
+    private Circle circle;
+    private Ellipse elli;
+    private Rectangle rect;
+    private Line singL;
+    private Polygon poly;
+    private Path pat;
+
+    public Path getPat() {
+        return pat;
+    }
+
+    public void setPat(Path pat) {
+        this.pat = pat;
+    }
+
+    public Polygon getPoly() {
+        return poly;
+    }
+
+    public void setPoly(Polygon poly) {
+        this.poly = poly;
+    }
+
+
+    public Circle getCircle() {
+        return circle;
+    }
+
+    public Line getSingL() {
+        return singL;
+    }
+
+    public void setSingL(Line singL) {
+        this.singL = singL;
+    }
+
+    public Ellipse getElli() {
+        return elli;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public void setCircle(Circle circle) {
+        this.circle = circle;
+    }
+
+    public void setElli(Ellipse elli) {
+        this.elli = elli;
+    }
+
+    public void setRect(Rectangle rect) {
+        this.rect = rect;
+    }
 
     public void setBimg(Image bimg) {
         this.bimg = bimg;

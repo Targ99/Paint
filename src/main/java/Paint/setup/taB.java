@@ -1,60 +1,66 @@
 package Paint.setup;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 
-public class taB extends Tab{
-
-//    protected GraphicsContext gc = drawBrd.getGraphicsContext2D();
+public class taB extends Tab
+{
     private allPrefs prefs;
     private double canvH = 700;
     private double canvW = 700;
-    private Canvas drawBrd;
+    private Rectangle backG;
+    private Pane dPane;
     private File saveSpace = null;
-
+    private drawPane drawpane;
 
 
     public taB(allPrefs pref)
     {
         prefs = pref;
+        drawpane = new drawPane(prefs);
     }
 
     public ScrollPane build()
     {
-        StackPane picdisplay = new StackPane();
-        ScrollPane scrollPane = new ScrollPane(picdisplay);
-        scrollPane.setMaxSize(canvW, canvH);
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        drawBrd = new drawBoard(prefs).build(canvW, canvH);
-        picdisplay.getChildren().add(drawBrd);
+        dPane = drawpane.buildPane();
+        Group dgroup = new Group(dPane);
+        ScrollPane scrollPane = new ScrollPane(dgroup);
+        System.out.println("drag taB");
+
         return scrollPane;
     }
 
-    public void changeCanv(double width, double height)
-    {
-        drawBrd.setWidth(width);
-        drawBrd.setHeight(height);
-        this.canvH = height;
-        this.canvW = width;
+    public drawPane getDrawPane() {
+        return drawpane;
     }
 
-    public File getSaveSpace() {
-        return saveSpace;
+    public Pane getdPane() {return dPane;}
+
+    public void setdPane(Pane dPane) {
+        this.dPane = dPane;
     }
 
-    public void setSaveSpace(File saveSpace) {
-        this.saveSpace = saveSpace;
+    public File getSaveSpace() {return saveSpace;}
+    public void setSaveSpace(File saveSpace) {this.saveSpace = saveSpace;}
+
+    public void setCanvW(double canvW) {
+        this.canvW = canvW;
     }
 
-    public Canvas getDrawBrd() {
-        return drawBrd;
+    public void setCanvH(double canvH) {
+        this.canvH = canvH;
     }
 
+    public double getCanvH() {
+        return canvH;
+    }
+
+    public double getCanvW() {
+        return canvW;
+    }
 }

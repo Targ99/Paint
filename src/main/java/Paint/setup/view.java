@@ -1,9 +1,10 @@
 package Paint.setup;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -50,13 +51,37 @@ public class view
     {
         HBox top = new HBox(new MenuPart(prefs).build());
         tabCont = new TabBar(prefs).buildTabs();
-
+        Slider zoom = buildSlider(prefs.getDrawPane().getScale()*100);
+        top.getChildren().add(zoom);
         prefs.setTabCont(tabCont);
         VBox drawPrefs = new VBox(new prefMenu(prefs).build());
         HBox bot = new HBox(5, tabCont, drawPrefs);
         VBox inScene = new VBox(top, bot);
         Scene scene = new Scene(inScene);
+        System.out.println("drag view");
         return scene;
+
+    }
+
+    public void zoom(double diff)
+    {
+        prefs.getCurrPane().setScaleX(diff / 100);
+        prefs.getCurrPane().setScaleY(diff / 100);
+        prefs.getDrawPane().setScale(diff / 100);
+    }
+
+    public Slider buildSlider(double value)
+    {
+        Slider slide = new Slider();
+        slide.setMin(50);
+        slide.setMax(400);
+        slide.setShowTickLabels(true);
+        slide.setShowTickMarks(true);
+        slide.setMajorTickUnit(50);
+        slide.setMinorTickCount(25);
+        slide.setValue(value);
+        slide.valueProperty().addListener((observableValue, number, t1) -> zoom((double) t1));
+        return slide;
     }
 
 }

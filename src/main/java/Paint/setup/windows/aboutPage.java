@@ -1,5 +1,6 @@
-package Paint.setup;
+package Paint.setup.windows;
 
+import Paint.setup.allPrefs;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

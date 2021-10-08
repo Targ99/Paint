@@ -1,19 +1,17 @@
 package Paint.setup;
 
-import javafx.scene.canvas.GraphicsContext;
+import Paint.setup.shapeCon.*;
 import javafx.scene.input.MouseEvent;
 
 public class drawCorners{
 
     private allPrefs prefs;
     private drawNums nums;
-    private GraphicsContext gc;
 
     public drawCorners(allPrefs pref, drawNums n1)
     {
         nums = n1;
         prefs = pref;
-        gc = prefs.getCurrCanv().getGraphicsContext2D();
     }
 
     public void pressed(MouseEvent event)
@@ -26,19 +24,38 @@ public class drawCorners{
 
         int x = (int)event.getX();   // x-coordinate where the user clicked.
         int y = (int)event.getY();   // y-coordinate where the user clicked.
-
-        int width = (int)prefs.getCurrCanv().getWidth();    // Width of the canvas.
-        int height = (int)prefs.getCurrCanv().getHeight();  // Height of the canvas.
+        nums.setPrevX(x);
+        nums.setPrevY(y);
+        int width = (int)prefs.getCanvW();    // Width of the canvas.
+        int height = (int)prefs.getCanvH();  // Height of the canvas.
 
 
         if (x > 0 && x < width && y > 0 && y < height) {
-            // The user has clicked on the white drawing area.
-            // Start drawing a curve from the point (x,y).
-            nums.setPrevX(x);
-            nums.setPrevY(y);
+            switch (prefs.getDrawType())
+            {
+                case 11,7:
+                    new circCon(prefs, nums).press(event);
+                    break;
+                case 16:
+                    new moveCon(prefs, nums).press(event);
+                    break;
+                case 13:
+                    new polyCon(prefs, nums).press(event);
+                    break;
+                case 14:
+                    new starCon(prefs, nums).press(event);
+                    break;
+                case 8,12:
+                    new elliCon(prefs, nums).press(event);
+                    break;
+                case 5,6,9,10:
+                    new rectCon(prefs, nums).press(event);
+                    break;
+                default:
+                    new lineCon(prefs, nums).press(event);
+                    break;
+            }
             nums.setDragging(true);
-            gc.setLineWidth(prefs.getDrawWidth());  // Use a 2-pixel-wide line for drawing.
-            gc.setStroke(prefs.getStrokeColor());
         }
     }
 
@@ -54,52 +71,75 @@ public class drawCorners{
         double y = event.getY();   // y-coordinate of mouse.
         if (x < 1)                          // Adjust the value of x,
             x = 1;                           //   to make sure it's in
-        if (x > prefs.getCurrCanv().getWidth())       //   the drawing area.
-            x = (int)prefs.getCurrCanv().getWidth();
+        if (x > prefs.getCanvW())       //   the drawing area.
+            x = (int)prefs.getCanvW();
 
         if (y < 1)                          // Adjust the value of y,
             y = 1;                           //   to make sure it's in
-        if (y > prefs.getCurrCanv().getHeight())       //   the drawing area.
-            y = prefs.getCurrCanv().getHeight();
-
+        if (y > prefs.getCanvH())       //   the drawing area.
+            y = prefs.getCanvH();
+        System.out.println(prefs.isFilled());
         nums.setFinX(x);
         nums.setFinY(y);
+        switch (prefs.getDrawType())
+        {
 
+            case 11,7:
+                new circCon(prefs, nums).drag(event);
+                break;
+            case 16:
+                new moveCon(prefs, nums).drag(event);
+                break;
+            case 8,12:
+                new elliCon(prefs, nums).drag(event);
+                break;
+            case 13:
+                new polyCon(prefs, nums).drag(event);
+                break;
+            case 14:
+                new starCon(prefs, nums).drag(event);
+                break;
+            case 5,6,9,10:
+                new rectCon(prefs, nums).drag(event);
+                break;
+            default:
+                new lineCon(prefs, nums).drag(event);
+                break;
+        }
+        System.out.println("drag");
     }
 
     public void released(MouseEvent event)
     {
-        gc.setFill(prefs.getDrawColor());
-        gc.setStroke(prefs.getStrokeColor());
-        gc.setLineWidth(prefs.getDrawWidth());
-        double num;
-        double num2;
         switch (prefs.getDrawType())
         {
-            case 4:
-                num = Math.min(nums.getFinX()-nums.getPrevX(), nums.getFinY()-nums.getPrevY());
-                gc.strokeRect(nums.getPrevX(),nums.getPrevY(),num,num);
+            case 11,7:
+                nums.setCircle(null);
                 break;
-            case 5:
-                num = nums.getFinX() - nums.getPrevX();
-                num2 = nums.getFinY() - nums.getPrevY();
-                gc.strokeRect(nums.getPrevX(),nums.getPrevY(),num, num2);
+            case 16:
+                new moveCon(prefs, nums).press(event);
                 break;
-            case 6:
-                num = Math.min(nums.getFinX()-nums.getPrevX(), nums.getFinY()-nums.getPrevY());
-                gc.strokeOval(nums.getPrevX(),nums.getPrevY(),num,num);
+            case 13, 14:
+                nums.setPoly(null);
                 break;
-            case 7:
-                num = nums.getFinX() - nums.getPrevX();
-                num2 = nums.getFinY() - nums.getPrevY();
-                gc.strokeOval(nums.getPrevX(),nums.getPrevY(),num,num2);
+            case 8,12:
+                nums.setElli(null);
                 break;
-            case 12:
-                uniRect makeR = new uniRect(prefs);
-                makeR.buildRect( nums.getPrevX(), nums.getPrevY(),nums.getFinX(), nums.getFinY());
+            case 5,6,9,10:
+                nums.setRect(null);
                 break;
-            case 15:
-                if(nums.isPlaced()) {
+            default:
+                nums.setSingL(null);
+                break;
+        }
+        nums.setDragging(false);
+        nums.setWasD(false);
+    }
+
+}
+
+/*
+if(nums.isPlaced()) {
                     placeImg place = new placeImg(prefs, nums);
                     place.getImg(nums.getPrevX(), nums.getPrevY(), nums.getFinX(), nums.getFinY());
                     System.out.println(nums.getPrevX() + "      " + nums.getPrevY() + nums.getFinX() + "      " + nums.getFinY());
@@ -109,22 +149,4 @@ public class drawCorners{
                     placeImg place = new placeImg(prefs, nums);
                     place.putImg();
                 }
-                break;
-            default:
-                if(!nums.isWasD())
-                {
-                    gc.strokeLine(nums.getPrevX(),nums.getPrevY(),nums.getPrevX(),nums.getPrevY());
-                    System.out.println(nums.getPrevX() + "      " + nums.getPrevY() + nums.getFinX() + "      " + nums.getFinY());
-                }
-                else
-                {
-                    System.out.println(nums.getPrevX() + "      " + nums.getPrevY());
-                    gc.strokeLine(nums.getPrevX(),nums.getPrevY(),nums.getFinX(),nums.getFinY());
-                }
-                break;
-        }
-        nums.setDragging(false);
-        nums.setWasD(false);
-    }
-
-}
+ */
