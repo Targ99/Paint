@@ -146,7 +146,4 @@ public class drawNums
     public void setPrevY(double prevY) {
         this.prevY = prevY;
     }
-
-
-
 }

@@ -89,7 +89,6 @@ public class copySel {
             BufferedImage sub2 = new BufferedImage((int) wid, (int) hei, bimg.getType());
             sub.copyData(sub2.getRaster());
             Image tempImg = SwingFXUtils.toFXImage(sub2, null);
-            System.out.println("prex = " + (int) draw.getPrevX() + "  prey = " + (int) draw.getPrevY());
             draw.setBimg(tempImg);
             if (prefs.getDrawType() == 19)
             {

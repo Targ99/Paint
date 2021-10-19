@@ -24,14 +24,12 @@ public class drawCorners{
         int y = (int)event.getY();   // y-coordinate where the user clicked.
         int width = (int)prefs.getCanvW();    // Width of the canvas.
         int height = (int)prefs.getCanvH();  // Height of the canvas.
-//        System.out.println("X "+ x + " Y " + y);
 
 
         if (x > 0 && x < width && y > 0 && y < height)
         {
             nums.setPrevX(x);
             nums.setPrevY(y);
-//            System.out.println("Press success");
             switch (prefs.getDrawType())
             {
                 case 11,7:
@@ -69,13 +67,10 @@ public class drawCorners{
 
         double x = event.getX();   // x-coordinate of mouse.
         double y = event.getY();   // y-coordinate of mouse.
-//        System.out.println("X "+ x + " Y " + y);
         if (x < 1)                          // Adjust the value of x,
             x = 1;                           //   to make sure it's in
         if (x > prefs.getCanvW())       //   the drawing area.
             x = (int)prefs.getCanvW();
-//        System.out.println(prefs.getCanvW());
-//        System.out.println(prefs.getCanvH());
 
         if (y < 1)                          // Adjust the value of y,
             y = 1;                           //   to make sure it's in

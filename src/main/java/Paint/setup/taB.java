@@ -4,7 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -21,7 +20,6 @@ public class taB extends Tab
     private File saveSpace = null;
     private File autoSpace = null;
     private drawPane drawpane;
-    private StackPane stackP;
     private Group dgroup;
     private ScrollPane scrollPane;
 

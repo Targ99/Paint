@@ -40,7 +40,6 @@ public class drawPixel {
                     WritableImage img = prefs.getCurrPane().snapshot(new SnapshotParameters(), null);
                     BufferedImage bimg = SwingFXUtils.fromFXImage(img, null);
                     var RGBA = bimg.getRGB((int)nums.getPrevY() , (int) nums.getPrevX());
-                    System.out.println(nums.getPrevX() + "      " + nums.getPrevY() + nums.getFinX() + "      " + nums.getFinY());
                     int alpha = (RGBA >> 24) & 255;
                     int red = (RGBA >> 16) & 255;
                     int green = (RGBA >> 8) & 255;

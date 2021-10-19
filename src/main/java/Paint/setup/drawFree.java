@@ -22,15 +22,10 @@ public class drawFree{
     {
         if (nums.isDragging())  // Ignore mouse presses that occur
             return;            //    when user is already drawing a curve.
-
-
         int x = (int)event.getX();   // x-coordinate where the user clicked.
         int y = (int)event.getY();   // y-coordinate where the user clicked.
-//        nums.setPrevX(x);
-//        nums.setPrevY(y);
         int width = (int)prefs.getCanvW();    // Width of the canvas.
         int height = (int)prefs.getCanvH();  // Height of the canvas.
-
 
         if (x > 0 && x < width && y > 0 && y < height) {
             // The user has clicked on the white drawing area.
@@ -72,8 +67,6 @@ public class drawFree{
         if (y > prefs.getCanvH())       //   the drawing area.
             y = prefs.getCanvH();
         nums.getPat().getElements().add(new LineTo(x,y));
-//        nums.setPrevX(x);  // Get ready for the next line segment in the curve.
-//        nums.setPrevY(y);
     }
 
 }

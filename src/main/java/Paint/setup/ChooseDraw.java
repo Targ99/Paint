@@ -21,7 +21,6 @@ public class ChooseDraw
      */
     void pressed(MouseEvent event)
     {
-//        System.out.println("drag press");
 
         switch (prefs.getDrawType()) {
             case 2, 15:

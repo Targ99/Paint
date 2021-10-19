@@ -37,35 +37,11 @@ public class allPrefs
 
 // Getters and Setters //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
-
-    public double getCanvH() {
-        return canvH;
-    }
-
-    public Button getRb17() {
-        return rb17;
-    }
-
-    public double getCanvW() {
-        return canvW;
-    }
-
-    public drawPane getDrawPane() {
-        return drawpane;
-    }
-
-    public void setDrawPane(drawPane drawpane) {
-        this.drawpane = drawpane;
-    }
-
-    public void setDraw(drawNums draw) {
-        this.draw = draw;
-    }
-
-    public drawNums getDraw() {
-        return draw;
-    }
-
+    public double getCanvH() {return canvH;}
+    public Button getRb17() {return rb17;}
+    public double getCanvW() {return canvW;}
+    public drawPane getDrawPane() {return drawpane;}
+    public drawNums getDraw() {return draw;}
     public Pane getCurrPane() {return currPane;}
     public TabPane getTabCont() {return tabCont;}
     public Stage getWindow() {return window;}
@@ -78,15 +54,14 @@ public class allPrefs
     public int getNumsides() {return numsides;}
     public boolean isFilled() {return filled;}
 
-
+    public void setDrawPane(drawPane drawpane) {this.drawpane = drawpane;}
+    public void setDraw(drawNums draw) {this.draw = draw;}
     public void setCanvH(double canvH) {
         this.canvH = canvH;
     }
-
     public void setCanvW(double canvW) {
         this.canvW = canvW;
     }
-
     public void setCurrTab(taB currTab) {this.currTab = currTab;}
     public void setCurrPane(Pane currPane) {this.currPane = currPane;}
     public void setCurrentFile(File currentFile) {this.currentFile = currentFile;}
@@ -97,9 +72,7 @@ public class allPrefs
     public void setTabCont(TabPane tabcont) {tabCont = tabcont;}
     public void setNumsides(int numsides) {this.numsides = numsides;}
     public void setFilled(boolean filled) {this.filled = filled;}
+    public void setRb17(Button rb17) {this.rb17 = rb17;}
 
-    public void setRb17(Button rb17) {
-        this.rb17 = rb17;
-    }
-    // Getters and Setters //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Getters and Setters //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
