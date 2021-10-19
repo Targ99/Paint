@@ -1,14 +1,8 @@
 package Paint.setup;
 
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
+import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -19,6 +13,7 @@ public class allPrefs
     private Stage window;
     private TabPane tabCont;
     private taB currTab;
+    private drawNums draw;
     private Pane currPane;
     private drawPane drawpane;
     private double canvW, canvH;
@@ -29,6 +24,7 @@ public class allPrefs
     private Color strokeColor = Color.BLACK;
     private double drawWidth = 10;
     private File currentFile = null;
+    private Button rb17;
 
     /**
      * class containing all of the preferences for uniformity across tabs
@@ -46,6 +42,10 @@ public class allPrefs
         return canvH;
     }
 
+    public Button getRb17() {
+        return rb17;
+    }
+
     public double getCanvW() {
         return canvW;
     }
@@ -56,6 +56,14 @@ public class allPrefs
 
     public void setDrawPane(drawPane drawpane) {
         this.drawpane = drawpane;
+    }
+
+    public void setDraw(drawNums draw) {
+        this.draw = draw;
+    }
+
+    public drawNums getDraw() {
+        return draw;
     }
 
     public Pane getCurrPane() {return currPane;}
@@ -90,6 +98,8 @@ public class allPrefs
     public void setNumsides(int numsides) {this.numsides = numsides;}
     public void setFilled(boolean filled) {this.filled = filled;}
 
-
+    public void setRb17(Button rb17) {
+        this.rb17 = rb17;
+    }
     // Getters and Setters //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }

@@ -13,8 +13,7 @@ import javafx.scene.text.Text;
 public class prefMenu {
     private allPrefs prefs;
     private ColorPicker colorpick, strokepick;
-    private Label colorLabel, strokeLabel, size, sides;
-    private Slider side, slide;
+    private Label colorLabel, strokeLabel, size, sides, str, fil, sid, siz, act;
 
     public prefMenu(allPrefs pref)
     {
@@ -36,12 +35,22 @@ public class prefMenu {
         strokeLabel = new Label(colorString(prefs.getStrokeColor()));
         size = new Label("Size = " + prefs.getDrawWidth());
         sides = new Label("Sides : " + prefs.getNumsides());
+        str = new Label("Line Color");
+        fil = new Label("Fill Color");
+        siz = new Label("Line Size");
+        sid = new Label("Number of Sides");
+        act = new Label("Action Type");
+        str.setFont(Font.font(null, FontWeight.BOLD, 15));
+        fil.setFont(Font.font(null, FontWeight.BOLD, 15));
+        siz.setFont(Font.font(null, FontWeight.BOLD, 15));
+        sid.setFont(Font.font(null, FontWeight.BOLD, 15));
+        act.setFont(Font.font(null, FontWeight.BOLD, 15));
         strokepick.setOnAction(event -> strokeAct());
         colorpick.setOnAction(event-> colorAct());
         GridPane markers = new drawChoice(prefs).build();
         Slider slide = buildSlider(prefs.getDrawWidth(), 0);
         Slider side = buildSlider(prefs.getNumsides(), 1);
-        drawprefs.getChildren().addAll(title, colorpick, colorLabel, strokepick, strokeLabel, markers, slide, size, side, sides);
+        drawprefs.getChildren().addAll(fil, colorpick, colorLabel, str, strokepick, strokeLabel,act, markers,siz, slide, size,sid, side, sides);
         return drawprefs;
     }
 

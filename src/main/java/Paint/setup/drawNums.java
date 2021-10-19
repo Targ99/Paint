@@ -1,22 +1,46 @@
 package Paint.setup;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.*;
 
 public class drawNums
 {
     private boolean dragging = false;
     private double prevX, prevY, finX, finY;
-    private boolean wasD;
     private Image bimg;
-    private double imgW, imgH;
-    private boolean placed = true;
     private Circle circle;
     private Ellipse elli;
     private Rectangle rect;
     private Line singL;
     private Polygon poly;
     private Path pat;
+    private boolean isMoving = false;
+    private ImageView view;
+
+    public void reset(boolean delImg)
+    {
+        dragging = false;
+        prevX = 0;
+        prevY = 0;
+        finX = 0;
+        finY = 0;
+        if(delImg) {bimg = null;}
+        circle = null;
+        elli = null;
+        rect = null;
+        singL = null;
+        poly = null;
+        pat = null;
+    }
+
+    public ImageView getView() {
+        return view;
+    }
+
+    public void setView(ImageView view) {
+        this.view = view;
+    }
 
     public Path getPat() {
         return pat;
@@ -24,6 +48,14 @@ public class drawNums
 
     public void setPat(Path pat) {
         this.pat = pat;
+    }
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
     }
 
     public Polygon getPoly() {
@@ -71,40 +103,8 @@ public class drawNums
         this.bimg = bimg;
     }
 
-    public boolean isPlaced() {
-        return placed;
-    }
-
-    public void setPlaced(boolean placed) {
-        this.placed = placed;
-    }
-
-    public double getImgH() {
-        return imgH;
-    }
-
-    public double getImgW() {
-        return imgW;
-    }
-
-    public void setImgH(double imgH) {
-        this.imgH = imgH;
-    }
-
-    public void setImgW(double imgW) {
-        this.imgW = imgW;
-    }
-
     public Image getBimg() {
         return bimg;
-    }
-
-    public boolean isWasD() {
-        return wasD;
-    }
-
-    public void setWasD(boolean wasD) {
-        this.wasD = wasD;
     }
 
     public boolean isDragging() {
@@ -146,5 +146,7 @@ public class drawNums
     public void setPrevY(double prevY) {
         this.prevY = prevY;
     }
+
+
 
 }

@@ -1,7 +1,5 @@
 package Paint.setup;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
@@ -28,8 +26,8 @@ public class drawFree{
 
         int x = (int)event.getX();   // x-coordinate where the user clicked.
         int y = (int)event.getY();   // y-coordinate where the user clicked.
-        nums.setPrevX(x);
-        nums.setPrevY(y);
+//        nums.setPrevX(x);
+//        nums.setPrevY(y);
         int width = (int)prefs.getCanvW();    // Width of the canvas.
         int height = (int)prefs.getCanvH();  // Height of the canvas.
 
@@ -50,7 +48,7 @@ public class drawFree{
                     nums.getPat().setStroke(prefs.getStrokeColor());
                     break;
                 default:
-                    nums.getPat().setStroke(Color.WHITE);
+                    nums.getPat().setStroke(Color.web("0xe3e3e3"));
             }
             prefs.getCurrPane().getChildren().add(tPath);
             prefs.getDrawPane().addStep(tPath);

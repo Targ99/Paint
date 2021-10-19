@@ -56,6 +56,8 @@ public class canSize {
         prefs.setCanvH(h);
         prefs.getCurrTab().setCanvW(w);
         prefs.getCurrTab().setCanvH(h);
+        prefs.getCurrTab().getBackG().setWidth(w);
+        prefs.getCurrTab().getBackG().setHeight(h);
         dialog.close();
     }
 

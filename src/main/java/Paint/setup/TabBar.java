@@ -42,6 +42,7 @@ public class TabBar{
     private taB newTab()
     {
         taB temp = new taB(prefs);
+        prefs.setCurrTab(temp);
         temp.setText("Unsaved");
         temp.setContent(temp.build());
         temp.setOnSelectionChanged (e -> isTab(temp));
@@ -62,6 +63,7 @@ public class TabBar{
         prefs.setDrawPane(currTab.getDrawPane());
         prefs.setCanvH(currTab.getCanvH());
         prefs.setCanvW(currTab.getCanvW());
+        prefs.setDraw(currTab.getDrawPane().getDraw().getNums());
     }
 
     /**

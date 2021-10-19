@@ -10,6 +10,10 @@ public class ChooseDraw
 
     public ChooseDraw(allPrefs pref) {prefs = pref;}
 
+    public drawNums getNums() {
+        return nums;
+    }
+
     /**
      * uses mouse event attributes and drawing parameters to
      * construct the desired shape
@@ -17,18 +21,17 @@ public class ChooseDraw
      */
     void pressed(MouseEvent event)
     {
-        System.out.println("drag press");
+//        System.out.println("drag press");
 
         switch (prefs.getDrawType()) {
             case 2, 15:
                 new drawFree(prefs, nums).pressed(event);
                 break;
-            case 4, 3:
+            case 4, 3, 17, 18:
                 new drawPixel(prefs, nums).pressed(event);
                 break;
             default:
                 System.out.println("drag corn");
-
                 new drawCorners(prefs, nums).pressed(event);
                 break;
         }
@@ -39,7 +42,7 @@ public class ChooseDraw
             case 2, 15:
                 new drawFree(prefs, nums).dragged(event);
                 break;
-            case 4, 3:
+            case 4, 3, 17, 18:
                 break;
             default:
                 new drawCorners(prefs, nums).dragged(event);
@@ -50,15 +53,15 @@ public class ChooseDraw
     {
         switch (prefs.getDrawType()) {
             case 2, 15:
-                nums.setDragging(false);
-                nums.setPat(null);
-
+                nums.reset(true);
                 break;
-            case 4, 3:
+            case 4, 3, 17, 18:
+                nums.reset(false);
                 break;
             default:
                 new drawCorners(prefs, nums).released(event);
                 break;
         }
+        nums.setDragging(false);
     }
 }

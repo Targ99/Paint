@@ -12,6 +12,10 @@ public class drawPane {
     private int currIter = 0;
     private double scale = 1;
 
+    public ChooseDraw getDraw() {
+        return draw;
+    }
+
     public drawPane(allPrefs pref)
     {
         prefs = pref;
@@ -25,7 +29,7 @@ public class drawPane {
     public Pane buildPane()
     {
         Pane drawPane = new Pane();
-        drawPane.setPrefSize(800, 800);
+        drawPane.setPrefSize(prefs.getCurrTab().getCanvW(), prefs.getCurrTab().getCanvH());
         prefs.setCurrPane(drawPane);
         drawPane.setOnMousePressed(event -> draw.pressed(event));
         drawPane.setOnMouseDragged(event -> draw.dragged(event));

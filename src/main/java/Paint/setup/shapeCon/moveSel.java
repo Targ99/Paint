@@ -5,7 +5,6 @@ import Paint.setup.allPrefs;
 import Paint.setup.drawNums;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -13,13 +12,12 @@ import javafx.scene.shape.Rectangle;
 
 import java.awt.image.BufferedImage;
 
-
-public class moveCon {
+public class moveSel {
 
     private allPrefs prefs;
     private drawNums draw;
 
-    public moveCon(allPrefs pref, drawNums dra)
+    public moveSel(allPrefs pref, drawNums dra)
     {
         prefs = pref;
         draw = dra;
@@ -28,32 +26,16 @@ public class moveCon {
     public void press(MouseEvent event)
     {
         if (!event.isPrimaryButtonDown()) {return;}
-        if(draw.isPlaced())
-        {
-            Rectangle circ = new Rectangle();
-            circ.setX(draw.getPrevX());
-            circ.setY(draw.getPrevY());
-            circ.setWidth(1);
-            circ.setHeight(1);
-            circ.setStroke(Color.BLACK);
-            circ.setStrokeWidth(2);
-            circ.setFill(Color.TRANSPARENT);
-            draw.setRect(circ);
-            prefs.getCurrPane().getChildren().add(circ);
-        }
-        else
-        {
-            ImageView iview = new ImageView(draw.getBimg());
-            prefs.getCurrPane().getChildren().add(iview);
-            prefs.getDrawPane().addStep(iview);
-            iview.setX(draw.getPrevX());
-            iview.setY(draw.getPrevY());
-            draw.getRect().setVisible(false);
-            draw.setBimg(null);
-            draw.setRect(null);
-            draw.setPlaced(true);
-        }
-
+        Rectangle circ = new Rectangle();
+        circ.setX(draw.getPrevX());
+        circ.setY(draw.getPrevY());
+        circ.setWidth(1);
+        circ.setHeight(1);
+        circ.setStroke(Color.BLACK);
+        circ.setStrokeWidth(2);
+        circ.setFill(Color.TRANSPARENT);
+        draw.setRect(circ);
+        prefs.getCurrPane().getChildren().add(circ);
     }
 
     public void drag(MouseEvent event)
@@ -65,15 +47,21 @@ public class moveCon {
         draw.getRect().setStrokeWidth(2);
         draw.getRect().setWidth(wid);
         draw.getRect().setHeight(hei);
+    }
+
+    public void release(MouseEvent event)
+    {
+        double wid = draw.getFinX() - draw.getPrevX();
+        double hei = draw.getFinY() - draw.getPrevY();
+        draw.getRect().setVisible(false);
         WritableImage img = prefs.getCurrPane().snapshot(new SnapshotParameters(), null);
         BufferedImage bimg = SwingFXUtils.fromFXImage(img, null);
         assert bimg != null;
         BufferedImage sub = bimg.getSubimage((int) draw.getPrevX(), (int) draw.getPrevY(), (int) wid, (int) hei);
-        Image tempImg = SwingFXUtils.toFXImage(sub, null);
+        BufferedImage sub2 = new BufferedImage((int) wid, (int) hei, bimg.getType());
+        sub.copyData(sub2.getRaster());
+        Image tempImg = SwingFXUtils.toFXImage(sub2, null);
+        System.out.println("prex = " + (int) draw.getPrevX() + "  prey = " + (int) draw.getPrevY());
         draw.setBimg(tempImg);
-        draw.setImgH(hei);
-        draw.setImgW(wid);
-        draw.setPlaced(false);
     }
-
 }

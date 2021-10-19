@@ -77,9 +77,14 @@ public class view
 
     public void zoom(double diff)
     {
+//        prefs.getCurrPane().setScaleX(diff / 100);
+//        prefs.getCurrPane().setScaleY(diff / 100);
+//        prefs.getDrawPane().setScale(diff / 100);
         prefs.getCurrPane().setScaleX(diff / 100);
         prefs.getCurrPane().setScaleY(diff / 100);
-        prefs.getDrawPane().setScale(diff / 100);
+        prefs.getCurrTab().getScrollPane().setFitToHeight(true);
+        prefs.getCurrTab().getScrollPane().setFitToWidth(true);
+//        prefs.getCurrTab().getStackP().
     }
 
     public Slider buildSlider(double value)

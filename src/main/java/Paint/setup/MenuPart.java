@@ -31,10 +31,11 @@ public class MenuPart{
         MenuItem newTab = new MenuItem("New Tab");
         MenuItem save = new MenuItem("Save");
         MenuItem saveas = new MenuItem("Save As");
+        MenuItem print = new MenuItem("Print");
         MenuItem help = new MenuItem("Help");
         MenuItem about = new MenuItem("About");
-        MenuItem zoomp = new MenuItem("Zoom+");
-        MenuItem zoomm = new MenuItem("Zoom-");
+//        MenuItem zoomp = new MenuItem("Zoom+");
+//        MenuItem zoomm = new MenuItem("Zoom-");
         MenuItem insert = new MenuItem("Insert");
         MenuItem undo = new MenuItem("Undo");
         MenuItem redo = new MenuItem("Redo");
@@ -56,7 +57,7 @@ public class MenuPart{
         insert.setOnAction(actionEvent -> new pics(prefs).findimg());
         newTab.setOnAction(event-> new TabBar(prefs).addTab(prefs.getTabCont()));
         menuHelp.getItems().addAll(help, about);
-        menuFile.getItems().addAll(newTab, insert, save, saveas,zoomp, zoomm);
+        menuFile.getItems().addAll(newTab, insert, save, saveas, print);
         menuEdit.getItems().addAll(undo, redo, canvs);
         MenuBar topbar = new MenuBar(); //instantiates a menu bar
         topbar.getMenus().addAll(menuFile, menuEdit, menuHelp);

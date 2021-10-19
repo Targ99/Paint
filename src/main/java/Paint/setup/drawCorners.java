@@ -20,24 +20,25 @@ public class drawCorners{
         {
             return;             //    when user is already drawing a curve.
         }                       // Ignore mouse presses that occur
-
-
         int x = (int)event.getX();   // x-coordinate where the user clicked.
         int y = (int)event.getY();   // y-coordinate where the user clicked.
-        nums.setPrevX(x);
-        nums.setPrevY(y);
         int width = (int)prefs.getCanvW();    // Width of the canvas.
         int height = (int)prefs.getCanvH();  // Height of the canvas.
+//        System.out.println("X "+ x + " Y " + y);
 
 
-        if (x > 0 && x < width && y > 0 && y < height) {
+        if (x > 0 && x < width && y > 0 && y < height)
+        {
+            nums.setPrevX(x);
+            nums.setPrevY(y);
+//            System.out.println("Press success");
             switch (prefs.getDrawType())
             {
                 case 11,7:
                     new circCon(prefs, nums).press(event);
                     break;
-                case 16:
-                    new moveCon(prefs, nums).press(event);
+                case 16, 19:
+                    new copySel(prefs, nums).press(event);
                     break;
                 case 13:
                     new polyCon(prefs, nums).press(event);
@@ -61,7 +62,6 @@ public class drawCorners{
 
     public void dragged(MouseEvent event)
     {
-        nums.setWasD(true);
         if (!nums.isDragging())
         {
             return;  // Nothing to do because the user isn't drawing.
@@ -69,16 +69,18 @@ public class drawCorners{
 
         double x = event.getX();   // x-coordinate of mouse.
         double y = event.getY();   // y-coordinate of mouse.
+//        System.out.println("X "+ x + " Y " + y);
         if (x < 1)                          // Adjust the value of x,
             x = 1;                           //   to make sure it's in
         if (x > prefs.getCanvW())       //   the drawing area.
             x = (int)prefs.getCanvW();
+//        System.out.println(prefs.getCanvW());
+//        System.out.println(prefs.getCanvH());
 
         if (y < 1)                          // Adjust the value of y,
             y = 1;                           //   to make sure it's in
         if (y > prefs.getCanvH())       //   the drawing area.
             y = prefs.getCanvH();
-        System.out.println(prefs.isFilled());
         nums.setFinX(x);
         nums.setFinY(y);
         switch (prefs.getDrawType())
@@ -87,8 +89,8 @@ public class drawCorners{
             case 11,7:
                 new circCon(prefs, nums).drag(event);
                 break;
-            case 16:
-                new moveCon(prefs, nums).drag(event);
+            case 16, 19:
+                new copySel(prefs, nums).drag(event);
                 break;
             case 8,12:
                 new elliCon(prefs, nums).drag(event);
@@ -106,34 +108,20 @@ public class drawCorners{
                 new lineCon(prefs, nums).drag(event);
                 break;
         }
-        System.out.println("drag");
     }
 
     public void released(MouseEvent event)
     {
         switch (prefs.getDrawType())
         {
-            case 11,7:
-                nums.setCircle(null);
-                break;
-            case 16:
-                new moveCon(prefs, nums).press(event);
-                break;
-            case 13, 14:
-                nums.setPoly(null);
-                break;
-            case 8,12:
-                nums.setElli(null);
-                break;
-            case 5,6,9,10:
-                nums.setRect(null);
+            case 16, 19:
+                new copySel(prefs, nums).release(event);
                 break;
             default:
-                nums.setSingL(null);
+                nums.reset(true);
                 break;
         }
         nums.setDragging(false);
-        nums.setWasD(false);
     }
 
 }

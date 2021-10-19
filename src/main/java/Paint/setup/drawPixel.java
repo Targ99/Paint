@@ -2,6 +2,7 @@ package Paint.setup;
 
 import Paint.setup.shapeCon.textWin;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -24,14 +25,15 @@ public class drawPixel {
 
         int x = (int) event.getX();   // x-coordinate where the user clicked.
         int y = (int) event.getY();   // y-coordinate where the user clicked.
-        nums.setPrevX(x);
-        nums.setPrevY(y);
+
         int width = (int) prefs.getCanvW();    // Width of the canvas.
         int height = (int) prefs.getCanvH();  // Height of the canvas.
 
 
-        if (x > 0 && x < width && y > 0 && y < height) {
-
+        if (x > 0 && x < width && y > 0 && y < height)
+        {
+            nums.setPrevX(x);
+            nums.setPrevY(y);
             switch (prefs.getDrawType())
             {
                 case 3:
@@ -47,6 +49,14 @@ public class drawPixel {
                     prefs.setDrawColor(col);
                     prefs.setStrokeColor(col);
                     System.out.println(col + "is the color selected");
+                    break;
+                case 18:
+                    ImageView iview = new ImageView(nums.getBimg());
+                    prefs.getCurrPane().getChildren().add(iview);
+                    prefs.getDrawPane().addStep(iview);
+                    iview.setX(nums.getPrevX());
+                    iview.setY(nums.getPrevY());
+                    nums.getRect().setVisible(false);
                     break;
                 default:
                     new textWin(prefs, nums).displayWin();
