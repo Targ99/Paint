@@ -45,7 +45,9 @@ public class circCon {
         if (draw.getCircle() == null) {return;}
         double rad = Math.min(draw.getFinX()- draw.getPrevX(), draw.getFinY()- draw.getPrevY());
         draw.getCircle().setStrokeWidth(prefs.getDrawWidth());
-        draw.getCircle().setRadius(rad);
+        if(new consTrain().checkCirc((int)draw.getPrevX(), (int)draw.getPrevY(), (int)rad))
+        {
+            draw.getCircle().setRadius(Math.abs(rad));
+        }
     }
-
 }

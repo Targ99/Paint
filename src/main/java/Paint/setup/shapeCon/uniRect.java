@@ -53,16 +53,16 @@ public class uniRect {
     public double[] buildStar(double x1, double y1, double x2, double y2)
     {
         double[] coords = new double[10];
-        coords[0] = Math.min(x1,x2);
+        coords[0] = Math.min(x1,x2)+(Math.abs(x1-x2)/5);
         coords[1] = Math.max(y1,y2);
         coords[2] = Math.abs((x2-x1)/2) + Math.min(x1,x2);
-        coords[3] = Math.max(y1,y2);
-        coords[4] = Math.max(x1,x2);
+        coords[3] = Math.min(y1,y2);
+        coords[4] = Math.min(x1,x2)+4*(Math.abs(x1-x2)/5);
         coords[5] = Math.max(y1,y2);
         coords[6] = Math.min(x1,x2);
-        coords[7] = Math.abs((y2-y1)/2) + Math.max(y1,y2);
+        coords[7] = Math.max(y1,y2) - 3*Math.abs((y2-y1)/5);
         coords[8] = Math.max(x1,x2);
-        coords[9] = Math.abs((y2-y1)/2) + Math.max(y1,y2);
+        coords[9] = Math.max(y1,y2) - 3*Math.abs((y2-y1)/5);
         for(int a = 0; a<10;a++)
         {
             System.out.println(coords[a]);

@@ -44,20 +44,18 @@ public class rectCon {
     {
         if (!event.isPrimaryButtonDown()) {return;}
         if (draw.getRect() == null) {return;}
-        if(prefs.getDrawType() == 5 || prefs.getDrawType() == 9)
+        double wid = Math.abs(draw.getFinX() - draw.getPrevX());
+        double hei = Math.abs(draw.getFinY() - draw.getPrevY());
+        double min = Math.min(wid, hei);
+        draw.getRect().setStrokeWidth(prefs.getDrawWidth());
+        draw.getRect().setX(Math.min(draw.getPrevX(), draw.getFinX()));
+        draw.getRect().setY(Math.min(draw.getPrevY(), draw.getFinY()));
+        if (prefs.getDrawType() == 5 || prefs.getDrawType() == 9)
         {
-            double wid = draw.getFinX() - draw.getPrevX();
-            double hei = draw.getFinY() - draw.getPrevY();
-            double min = Math.min(wid, hei);
-            draw.getRect().setStrokeWidth(prefs.getDrawWidth());
             draw.getRect().setWidth(min);
             draw.getRect().setHeight(min);
-        }
-        else
+        } else
         {
-            double wid = draw.getFinX() - draw.getPrevX();
-            double hei = draw.getFinY() - draw.getPrevY();
-            draw.getRect().setStrokeWidth(prefs.getDrawWidth());
             draw.getRect().setWidth(wid);
             draw.getRect().setHeight(hei);
         }

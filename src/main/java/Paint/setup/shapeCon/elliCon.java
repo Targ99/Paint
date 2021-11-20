@@ -47,9 +47,11 @@ public class elliCon {
         double radx = Math.abs(draw.getFinX() - draw.getPrevX());
         double rady = Math.abs(draw.getFinY() - draw.getPrevY());
         draw.getElli().setStrokeWidth(prefs.getDrawWidth());
-        draw.getElli().setRadiusX(radx);
-        draw.getElli().setRadiusY(rady);
-
+        if(new consTrain().checkElli((int)draw.getPrevX(), (int)draw.getPrevY(), (int)radx, (int)rady))
+        {
+            draw.getElli().setRadiusX(radx);
+            draw.getElli().setRadiusY(rady);
+        }
     }
 
 }
